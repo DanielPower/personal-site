@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:wght@301&display=swap');
+
+@font-face {
+  font-family: Fantasque Sans Mono;
+  src: url('res/fonts/FantasqueSansMono-Regular.woff2');
+}
+
+:root {
+  --bg-color: #d9edff;
+  --fg-color: #000000;
+}
+
+html {
+  background: var(--bg-color);
+  color: var(--fg-color);
+}
+
+h1, h2 {
+  font-family: Roboto Serif;
+}
+
+h2 {
+  font-size: 1.25rem;
+}
+
+a {
+  color: #1451a0;
+  text-decoration: none;
+}
+
+p {
+  font-family: Fantasque Sans Mono;
+  font-size: 1rem;
+}
+
+img {
+  display: block;
+}
+
+.badge-container {
+  display: flex;
+}
+
+.badge {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.5rem;
+}
+
+.container {
+  max-width: 30rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.project {
+  border: 1px solid var(--fg-color);
+  border-radius: 0.25rem;
+}
