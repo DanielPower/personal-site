@@ -2,12 +2,14 @@
 
 @font-face {
   font-family: Fantasque Sans Mono;
-  src: url('res/fonts/FantasqueSansMono-Regular.woff2');
+  src: url('res/fonts/BerkeleyMonoVariable-Regular.woff2');
+  font-weight: 100;
 }
 
 :root {
   --bg-color: #d9edff;
   --fg-color: #000000;
+  --url-color: #0c4999;
 }
 
 html {
@@ -15,16 +17,12 @@ html {
   color: var(--fg-color);
 }
 
-h1, h2 {
+h1, h2, h3 {
   font-family: Roboto Serif;
 }
 
-h2 {
-  font-size: 1.25rem;
-}
-
 a {
-  color: #1451a0;
+  color: var(--url-color);
   text-decoration: none;
 }
 
