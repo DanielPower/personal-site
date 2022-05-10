@@ -1,0 +1,19 @@
+@font-face {
+  font-family: Berkeley Mono;
+  src: url('res/fonts/BerkeleyMonoVariable-Regular.woff2');
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: Roboto Serif;
+  src: url('res/fonts/RobotoSerif-Regular.ttf');
+  font-weight: 400;
+}
+
+h1, h2, h3 {
+  font-family: Roboto Serif;
+}
+
+p {
+  font-family: Berkeley Mono;
+}
