@@ -1,0 +1,4 @@
+#!/bin/sh
+rm -rf dist
+cp -r static dist
+npm exec -c 'ejs ./templates/index.ejs -f ./data.json -o ./dist/index.html'
