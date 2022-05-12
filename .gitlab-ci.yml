@@ -9,6 +9,7 @@ docker-build:
   # All other branches are tagged with the escaped branch name (commit ref slug)
   script:
     - apk add npm
+    - npm install
     - ./build
     - |
       if [[ "$CI_COMMIT_BRANCH" == "$CI_DEFAULT_BRANCH" ]]; then
