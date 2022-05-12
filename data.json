@@ -19,7 +19,9 @@
   "projects": [
     {
       "title": "Opine",
-      "description": "Opinionated store structure built on top of Zustand",
+      "description": [
+        "Opinionated store structure built on top of Zustand"
+      ],
       "links": [
         {
           "title": "Demo",
@@ -33,7 +35,9 @@
     },
     {
       "title": "Keeb Pro",
-      "description": "Typing speed trainer built with Svelte",
+      "description": [
+        "Typing speed trainer built with Svelte"
+      ],
       "links": [
         {
           "title": "Website",
@@ -47,7 +51,10 @@
     },
     {
       "title": "Nerd Font Patch Service",
-      "description": "Web application for patching fonts with Nerd Font glyphs",
+      "description": [
+        "Work in progress",
+        "Web application for patching fonts with Nerd Font glyphs"
+      ],
       "links": []
     }
   ]
