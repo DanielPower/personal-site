@@ -1,0 +1,42 @@
+:root {
+	--color-bg: #e5eeff;
+	--color-fg: #000000;
+	--color-url: #0c4999;
+}
+
+@font-face {
+	font-family: Berkeley;
+	src: url('/berkeley.woff2');
+	font-weight: 100;
+}
+
+html {
+	font-family: Berkeley;
+	background: var(--color-bg);
+	color: var(--color-fg);
+}
+
+body {
+	padding: 2rem;
+	max-width: 800px;
+	margin: 0 auto 0 auto;
+}
+
+a {
+	color: var(--color-url);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+h1 {
+	font-size: 1.5rem;
+	margin: 0 0 1rem 0;
+}
+
+h2,
+h3 {
+	margin: 0 0 1rem 0;
+}

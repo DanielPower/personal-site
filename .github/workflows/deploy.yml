@@ -3,41 +3,22 @@ on:
   push:
     branches:
       - main
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   deploy:
-    name: Push Docker Image
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Setup Node
-        uses: actions/setup-node@v3
-      - name: Install npm packages
-        run: npm ci
-      - name: Build Website
-        run: ./build
-      - name: Login to container registry
-        uses: docker/login-action@v2
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v4
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16.x
+    - name: Build Site
+      run: npm run build
+    - name: Set up S3cmd cli tool
+      uses: s3-actions/s3cmd@v1.4.0
+      with:
+        provider: linode
+        region: "us-east-1"
+        access_key: ${{ secrets.S3_ACCESS_KEY }}
+        secret_key: ${{ secrets.S3_SECRET_KEY }}
+    - name: Push files to Object Storage
+      run: |
+        s3cmd sync build s3://bucket-personal-site
