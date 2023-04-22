@@ -4,3 +4,4 @@
 /node_modules
 /terraform/terraform.tfvars
 /terraform/.terraform
+*.tfstate
