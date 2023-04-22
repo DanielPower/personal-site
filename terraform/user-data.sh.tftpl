@@ -1,0 +1,13 @@
+#!/bin/bash
+set -e
+
+dnf install \
+  git \
+  nodejs \
+  -y
+
+git clone --depth 1 --branch "${branch}" https://github.com/danielpower/personal-site
+cd personal-site
+npm install
+npm run build
+npm exec http-server build
