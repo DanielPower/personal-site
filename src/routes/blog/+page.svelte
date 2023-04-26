@@ -1,12 +1,16 @@
 <script lang="ts">
-	export let data;
+	import type { Post } from '../../../types';
+
+	export let data: {
+		posts: Post[];
+	};
 </script>
 
 {#each data.posts as post}
 	<div>
-		{post.meta.date}
+		{post.metadata.date}
 		<a href={post.path}>
-			{post.meta.title}
+			{post.metadata.title}
 		</a>
 	</div>
 {/each}

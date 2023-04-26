@@ -1,15 +1,15 @@
-<script>
-	import "prism-themes/themes/prism-nord.min.css";
-	import { page } from "$app/stores";
+<script lang="ts">
+	import 'prism-themes/themes/prism-nord.min.css';
+	import { page } from '$app/stores';
 	const menuItems = [
-		{ title: "Home", url: "/" },
-		{ title: "Blog", url: "/blog" },
+		{ title: 'Home', url: '/' },
+		{ title: 'Blog', url: '/blog' },
 		{
-			title: "Resume",
-			url: "https://github.com/DanielPower/resume/raw/master/resume.pdf",
+			title: 'Resume',
+			url: 'https://github.com/DanielPower/resume/raw/master/resume.pdf'
 		},
-		{ title: "GitHub", url: "https://www.github.com/danielpower" },
-		{ title: "Contact", url: "mailto:me@danielpower.ca" },
+		{ title: 'GitHub', url: 'https://www.github.com/danielpower' },
+		{ title: 'Contact', url: 'mailto:me@danielpower.ca' }
 	];
 </script>
 
@@ -17,9 +17,7 @@
 	<dan>Daniel Power</dan>
 	<nav>
 		{#each menuItems as menuItem}
-			<a class:active={menuItem.url === $page.route.id} href={menuItem.url}
-				>{menuItem.title}</a
-			>
+			<a class:active={menuItem.url === $page.route.id} href={menuItem.url}>{menuItem.title}</a>
 		{/each}
 	</nav>
 </header>
