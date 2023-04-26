@@ -1,0 +1,56 @@
+:root {
+	--color-bg: #e5eeff;
+	--color-fg: #000000;
+	--color-url: #0c4999;
+	--gutter: 2rem;
+}
+
+@font-face {
+	font-family: Berkeley;
+	src: url('/berkeley.woff2');
+	font-weight: 100;
+}
+
+html {
+	font-family: Berkeley;
+	background: var(--color-bg);
+	color: var(--color-fg);
+}
+
+body {
+	margin: var(--gutter) auto var(--gutter) auto;
+	max-width: min(800px, calc(100% - var(--gutter) * 2));
+	min-height: calc(100vh - var(--gutter) * 2);
+	display: flex;
+	flex-direction: column;
+}
+
+a {
+	color: var(--color-url);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+h1 {
+	font-size: 1.5rem;
+	margin: 0 0 1rem 0;
+}
+
+h2,
+h3 {
+	margin: 0 0 1rem 0;
+}
+
+p {
+	margin: 0 0 1rem 0;
+	text-align: justify;
+}
+
+@media screen and (max-width: 600px) {
+	:root {
+		--gutter: 1rem;
+	}
+}
