@@ -21,7 +21,10 @@
 		{/each}
 	</nav>
 </header>
-<slot />
+<content>
+	<slot />
+</content>
+<footer>Copyright © 2023, Daniel Power</footer>
 
 <style>
 	dan {
@@ -33,8 +36,13 @@
 		width: 300px;
 		margin: 1rem 0 1rem 0;
 	}
-
 	nav .active {
 		font-weight: 700;
+	}
+	content {
+		flex-grow: 1;
+	}
+	footer {
+		margin: 0 auto 0 auto;
 	}
 </style>
