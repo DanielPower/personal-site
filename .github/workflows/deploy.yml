@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - main
-      - wip-docker
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
