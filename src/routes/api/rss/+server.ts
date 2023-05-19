@@ -15,7 +15,7 @@ const renderRss = (posts: Post[]) =>
 			rss: {
 				channel: {
 					title: 'Daniel Power',
-					link: PUBLIC_ORIGIN,
+					link: 'https://www.danielpower.ca',
 					item: posts.map((post) => ({
 						title: post.metadata.title,
 						link: post.path
