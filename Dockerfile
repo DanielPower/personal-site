@@ -10,5 +10,6 @@ RUN rm -rf ./*
 COPY --from=build /app/package.json .
 COPY --from=build /app/build .
 RUN npm install --omit=dev
+ENV PUBLIC_ORIGIN https://www.danielpower.ca
 EXPOSE 3000/tcp
 CMD ["node", "index.js"]
