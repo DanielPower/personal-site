@@ -1,9 +1,9 @@
-import { PUBLIC_ORIGIN } from '$env/static/public';
 import type { Post } from '../../../../types';
 import { fetchMarkdownPosts } from '../../../util/posts';
 import { js2xml } from 'xml-js';
+import type { RequestHandler } from './$types';
 
-const renderRss = (posts: Post[]) =>
+const renderRss = (posts: Post[], origin: string) =>
 	js2xml(
 		{
 			_declaration: {
@@ -15,10 +15,10 @@ const renderRss = (posts: Post[]) =>
 			rss: {
 				channel: {
 					title: 'Daniel Power',
-					link: 'https://www.danielpower.ca',
+					link: origin,
 					item: posts.map((post) => ({
 						title: post.metadata.title,
-						link: post.path
+						link: `${origin}${post.path}`
 					}))
 				}
 			}
@@ -26,13 +26,13 @@ const renderRss = (posts: Post[]) =>
 		{ compact: true }
 	);
 
-export const GET = async () => {
+export const GET: RequestHandler = async ({ url }) => {
 	const allPosts = await fetchMarkdownPosts();
 	const sortedPosts = allPosts.sort(
 		(a, b) => +new Date(b.metadata.date) - +new Date(a.metadata.date)
 	);
 
-	return new Response(renderRss(sortedPosts), {
+	return new Response(renderRss(sortedPosts, url.origin), {
 		headers: {
 			'Cache-Control': `max-age=0, s-max-age=${600}`,
 			'Content-Type': 'application/xml'
