@@ -14,17 +14,25 @@ const renderRss = (posts: Post[], origin: string) =>
 			},
 			rss: {
 				_attributes: {
-					version: '2.0'
+					version: '2.0',
+					'xmlns:atom': 'http://www.w3.org/2005/Atom'
 				},
 				channel: {
 					title: 'Daniel Power',
+					description: "Daniel Power's ramblings",
 					link: origin,
+					'atom:link': {
+						_attributes: {
+							href: 'https://www.danielpower.ca/api/rss',
+							rel: 'self',
+							type: 'application/rss+xml'
+						}
+					},
 					item: posts.map((post) => ({
 						title: post.metadata.title,
-						link: `${origin}${post.path}`,
-						pubDate: new Date(post.metadata.date).toUTCString(),
 						guid: `${origin}${post.path}`,
-						author: 'me@danielpower.ca'
+						link: `${origin}${post.path}`,
+						pubDate: new Date(post.metadata.date).toUTCString()
 					}))
 				}
 			}
