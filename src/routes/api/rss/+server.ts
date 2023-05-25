@@ -13,12 +13,14 @@ const renderRss = (posts: Post[], origin: string) =>
 				}
 			},
 			rss: {
+				version: '2.0',
 				channel: {
 					title: 'Daniel Power',
 					link: origin,
 					item: posts.map((post) => ({
 						title: post.metadata.title,
-						link: `${origin}${post.path}`
+						link: `${origin}${post.path}`,
+						guid: `${origin}${post.path}`
 					}))
 				}
 			}
