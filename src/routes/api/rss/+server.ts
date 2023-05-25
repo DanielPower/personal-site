@@ -13,14 +13,18 @@ const renderRss = (posts: Post[], origin: string) =>
 				}
 			},
 			rss: {
-				version: '2.0',
+				_attributes: {
+					version: '2.0'
+				},
 				channel: {
 					title: 'Daniel Power',
 					link: origin,
 					item: posts.map((post) => ({
 						title: post.metadata.title,
 						link: `${origin}${post.path}`,
-						guid: `${origin}${post.path}`
+						pubDate: new Date(post.metadata.date).toUTCString(),
+						guid: `${origin}${post.path}`,
+						author: 'me@danielpower.ca'
 					}))
 				}
 			}
