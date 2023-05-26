@@ -1,5 +1,5 @@
-import type { Post } from '../../../../types';
-import { fetchMarkdownPosts } from '../../../util/posts';
+import type { Post } from '../../../types';
+import { fetchMarkdownPosts } from '../../util/posts';
 import { js2xml } from 'xml-js';
 import type { RequestHandler } from './$types';
 
@@ -15,7 +15,6 @@ const renderRss = (posts: Post[], origin: string) =>
 			rss: {
 				_attributes: {
 					version: '2.0',
-					'xmlns:atom': 'http://www.w3.org/2005/Atom'
 				},
 				channel: {
 					title: 'Daniel Power',
@@ -23,7 +22,7 @@ const renderRss = (posts: Post[], origin: string) =>
 					link: origin,
 					'atom:link': {
 						_attributes: {
-							href: 'https://www.danielpower.ca/api/rss',
+							href: `${origin}rss`,
 							rel: 'self',
 							type: 'application/rss+xml'
 						}
