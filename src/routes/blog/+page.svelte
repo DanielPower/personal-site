@@ -9,7 +9,7 @@
 {#each data.posts as post}
 	<div>
 		{post.metadata.date}
-		<a href={post.path}>
+		<a href={`blog/${post.file}`}>
 			{post.metadata.title}
 		</a>
 	</div>

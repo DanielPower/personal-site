@@ -6,11 +6,11 @@ export const fetchMarkdownPosts = async () => {
 
 	return Promise.all(
 		iterablePostFiles.map(async ([path, resolver]) => {
-			const filename = path.split('/').at(-1)?.split('.').at(0);
+			const file = path.split('/').at(-1)?.split('.').at(0)!;
 			const { metadata } = await resolver();
 			return {
 				metadata,
-				path: `/blog/${filename}`
+				file
 			};
 		})
 	);
