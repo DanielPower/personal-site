@@ -1,56 +1,77 @@
 :root {
-	--color-bg: #e5eeff;
-	--color-fg: #000000;
-	--color-url: #0c4999;
-	--gutter: 2rem;
+    --color-bg: #e5eeff;
+    --color-fg: #000000;
+    --color-url: #0c4999;
+    --gutter: 2rem;
 }
 
 @font-face {
-	font-family: Berkeley;
-	src: url('/berkeley.woff2');
-	font-weight: 100;
+    font-family: Berkeley;
+    src: url('/berkeley.woff2');
+    font-weight: 100 900;
+}
+
+@font-face {
+    font-family: Nerd Font;
+    src: url('/nerd_font.ttf');
 }
 
 html {
-	font-family: Berkeley;
-	background: var(--color-bg);
-	color: var(--color-fg);
+    font-family: Berkeley, 'Nerd Font', sans-serif;
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-weight: 100;
 }
 
 body {
-	margin: var(--gutter) auto var(--gutter) auto;
-	max-width: min(800px, calc(100% - var(--gutter) * 2));
-	min-height: calc(100vh - var(--gutter) * 2);
-	display: flex;
-	flex-direction: column;
+    margin: var(--gutter) auto var(--gutter) auto;
+    max-width: min(800px, calc(100% - var(--gutter) * 2));
+    min-height: calc(100vh - var(--gutter) * 2);
+    display: flex;
+    flex-direction: column;
 }
 
 a {
-	color: var(--color-url);
-	text-decoration: none;
+    color: var(--color-url);
+    text-decoration: none;
 }
 
 a:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 
 h1 {
-	font-size: 1.5rem;
-	margin: 0 0 1rem 0;
+    font-size: 1.5rem;
+    margin: 0 0 1rem 0;
 }
 
 h2,
 h3 {
-	margin: 0 0 1rem 0;
+    margin: 0 0 1rem 0;
 }
 
 p {
-	margin: 0 0 1rem 0;
-	text-align: justify;
+    margin: 1rem 0 1rem 0;
+    text-align: justify;
+}
+
+p:first-child {
+    margin-top: 0;
+}
+
+p:last-child {
+    margin-bottom: 0;
 }
 
 @media screen and (max-width: 600px) {
-	:root {
-		--gutter: 1rem;
-	}
+    :root {
+        --gutter: 1rem;
+    }
+}
+
+@media print {
+    a {
+        color: black;
+        text-decoration: underline;
+    }
 }
