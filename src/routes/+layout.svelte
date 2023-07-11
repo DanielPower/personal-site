@@ -4,29 +4,39 @@
 	const menuItems = [
 		{ title: 'Home', url: '/' },
 		{ title: 'Blog', url: '/blog' },
-		{
-			title: 'Resume',
-			url: 'https://github.com/DanielPower/resume/raw/master/resume.pdf'
-		},
+		{ title: 'Resume', url: '/resume' },
 		{ title: 'GitHub', url: 'https://www.github.com/danielpower' },
 		{ title: 'Contact', url: 'mailto:me@danielpower.ca' }
 	];
 </script>
 
-<header>
-	<dan>Daniel Power</dan>
-	<nav>
-		{#each menuItems as menuItem}
-			<a class:active={menuItem.url === $page.route.id} href={menuItem.url}>{menuItem.title}</a>
-		{/each}
-	</nav>
-</header>
-<content>
-	<slot />
-</content>
-<footer>Copyright © 2023, Daniel Power</footer>
+<layout>
+	<header>
+		<dan>Daniel Power</dan>
+		<nav>
+			{#each menuItems as menuItem}
+				<a class:active={menuItem.url === $page.route.id} href={menuItem.url}>{menuItem.title}</a>
+			{/each}
+		</nav>
+	</header>
+	<content>
+		<slot />
+	</content>
+	<footer>Copyright © 2023, Daniel Power</footer>
+</layout>
 
 <style>
+	layout {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		height: 100%;
+	}
+	header {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
 	dan {
 		font-size: 2rem;
 	}
@@ -34,15 +44,21 @@
 		display: flex;
 		gap: 1rem;
 		width: 300px;
-		margin: 1rem 0 1rem 0;
 	}
 	nav .active {
 		font-weight: 700;
 	}
 	content {
+		height: 100%;
 		flex-grow: 1;
 	}
 	footer {
 		margin: 0 auto 0 auto;
+	}
+
+	@media print {
+		nav {
+			display: none;
+		}
 	}
 </style>

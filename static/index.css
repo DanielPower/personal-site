@@ -8,13 +8,19 @@
 @font-face {
 	font-family: Berkeley;
 	src: url('/berkeley.woff2');
-	font-weight: 100;
+	font-weight: 100 900;
+}
+
+@font-face {
+	font-family: Nerd Font;
+	src: url('/nerd_font.ttf');
 }
 
 html {
 	font-family: Berkeley;
 	background: var(--color-bg);
 	color: var(--color-fg);
+	font-weight: 100;
 }
 
 body {
@@ -45,12 +51,27 @@ h3 {
 }
 
 p {
-	margin: 0 0 1rem 0;
+	margin: 1rem 0 1rem 0;
 	text-align: justify;
+}
+
+p:first-child {
+	margin-top: 0;
+}
+
+p:last-child {
+	margin-bottom: 0;
 }
 
 @media screen and (max-width: 600px) {
 	:root {
 		--gutter: 1rem;
+	}
+}
+
+@media print {
+	a {
+		color: black;
+		text-decoration: underline;
 	}
 }
