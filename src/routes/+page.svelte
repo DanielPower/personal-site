@@ -1,0 +1,36 @@
+<script>
+	import Fa from 'svelte-fa/src/fa.svelte';
+	import { faGithub, faInstagram, faMastodon, faSteam } from '@fortawesome/free-brands-svg-icons';
+	import { faCircle, faEnvelope, faPaw } from '@fortawesome/free-solid-svg-icons';
+</script>
+
+<p>Senior Software Developer @ <a href="https://www.colabsoftware.com">CoLab Software</a></p>
+
+<p>Located in St. John's, Newfoundland</p>
+
+<div class="group">
+	Social
+	<a href="mailto://me@danielpower.ca"><Fa icon={faEnvelope} /> Email</a>
+	<a href="https://www.instagram.com/ifcoffeethendan/"><Fa icon={faInstagram} /> Instagram</a>
+	<a href="https://www.mastodon.online/@CrispyUmbrella"><Fa icon={faMastodon} /> Mastodon</a>
+</div>
+
+<div class="group">
+	Coding
+	<a href="https://www.github.com/danielpower"><Fa icon={faGithub} /> GitHub</a>
+	<a href="https://open.kattis.com/users/crispyumbrella"><Fa icon={faPaw} /> Kattis</a>
+</div>
+
+<div class="group">
+	Gaming
+	<a href="https://www.steamcommunity.com/id/DanielPower/"><Fa icon={faSteam} /> Steam</a>
+	<a href="https://osu.ppy.sh/users/10624401"><Fa icon={faCircle} class="fa-light" /> osu!</a>
+</div>
+
+<style>
+	.group {
+		display: flex;
+		flex-direction: column;
+		margin: 1rem 0 1rem 0;
+	}
+</style>

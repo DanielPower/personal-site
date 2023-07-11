@@ -11,13 +11,8 @@
 	font-weight: 100 900;
 }
 
-@font-face {
-	font-family: Nerd Font;
-	src: url('/nerd_font.ttf');
-}
-
 html {
-	font-family: Berkeley, 'Nerd Font', sans-serif;
+	font-family: Berkeley, sans-serif;
 	background: var(--color-bg);
 	color: var(--color-fg);
 	font-weight: 100;
