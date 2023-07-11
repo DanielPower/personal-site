@@ -43,11 +43,13 @@ a:hover {
 h1 {
     font-size: 1.5rem;
     margin: 0 0 1rem 0;
+    font-weight: 150;
 }
 
 h2,
 h3 {
     margin: 0 0 1rem 0;
+    font-weight: 125;
 }
 
 p {
