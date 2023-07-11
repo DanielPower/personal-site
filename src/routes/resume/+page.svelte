@@ -1,20 +1,26 @@
+<script>
+	import Fa from 'svelte-fa/src/fa.svelte';
+	import { faEnvelope, faGlobe, faPhone } from '@fortawesome/free-solid-svg-icons';
+	import { faGithub } from '@fortawesome/free-brands-svg-icons';
+</script>
+
 <div class="badges">
-	<div class="badge">
-		<div class="icon"></div>
+	<span class="badge">
+		<Fa icon={faPhone} scale={1.1} />
 		709-699-6599
-	</div>
-	<div class="badge">
-		<div class="icon">󰇮</div>
+	</span>
+	<span class="badge">
+		<Fa icon={faEnvelope} scale={1.1} />
 		<a href="mailto://me@danielpower.ca">me@danielpower.ca</a>
-	</div>
-	<div class="badge">
-		<div class="icon">󰖟</div>
+	</span>
+	<span class="badge">
+		<Fa icon={faGlobe} scale={1.1} />
 		<a href="https://www.danielpower.ca">danielpower.ca</a>
-	</div>
-	<div class="badge">
-		<div class="icon"></div>
+	</span>
+	<span class="badge">
+		<Fa icon={faGithub} scale={1.1} />
 		<a href="https://www.github.com/danielpower">danielpower</a>
-	</div>
+	</span>
 </div>
 <h2>Experience</h2>
 <h3>CoLab Software</h3>
@@ -78,14 +84,7 @@
 		justify-content: space-between;
 		margin-bottom: 1rem;
 		flex-wrap: wrap;
-		gap: 1rem;
-	}
-
-	.badge {
-		display: flex;
-		align-items: center;
-		gap: 0.25rem;
-		line-height: 14px;
+		row-gap: 0.5rem;
 	}
 
 	.job {
@@ -95,16 +94,12 @@
 		transition: ease all 0.25s;
 	}
 
-	.icon {
-		font-size: 1.25rem;
-	}
-
-	@media screen and (max-width: 750px) {
+	@media screen and (max-width: 740px) {
 		.badge {
-			width: 180px;
+			width: 200px;
 		}
 		.badges {
-			max-width: 380px;
+			max-width: 400px;
 			justify-content: left;
 		}
 	}
