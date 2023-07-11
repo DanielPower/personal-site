@@ -71,7 +71,6 @@
 	p {
 		margin-left: 1rem;
 		margin-right: 1rem;
-		text-align: justify;
 	}
 
 	.badges {
@@ -93,23 +92,26 @@
 		display: flex;
 		justify-content: space-between;
 		margin: 1rem 0 1rem 0;
+		transition: ease all 0.25s;
 	}
 
 	.icon {
 		font-size: 1.25rem;
 	}
 
-	@media screen and (max-width: 800px) {
-		.badges {
-			flex-direction: column;
+	@media screen and (max-width: 750px) {
+		.badge {
+			width: 180px;
 		}
+		.badges {
+			max-width: 380px;
+			justify-content: left;
+		}
+	}
 
+	@media screen and (max-width: 650px) {
 		.job {
 			flex-direction: column;
-		}
-
-		p {
-			text-align: left;
 		}
 	}
 </style>
