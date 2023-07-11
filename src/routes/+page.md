@@ -13,4 +13,4 @@ Coding
 
 Gaming  
 [󰓓 Steam](https://steamcommunity.com/id/DanielPower/)  
-[ osu!](https://osu.ppy.sh/users/10624401)  
+[ osu!](https://osu.ppy.sh/users/10624401)
