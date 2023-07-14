@@ -1,14 +1,10 @@
 <script>
 	import Fa from 'svelte-fa/src/fa.svelte';
-	import { faEnvelope, faGlobe, faPhone } from '@fortawesome/free-solid-svg-icons';
-	import { faGithub } from '@fortawesome/free-brands-svg-icons';
+	import { faEnvelope, faGlobe } from '@fortawesome/free-solid-svg-icons';
+	import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 </script>
 
 <div class="badges">
-	<span class="badge">
-		<Fa icon={faPhone} scale={1.1} />
-		709-699-6599
-	</span>
 	<span class="badge">
 		<Fa icon={faEnvelope} scale={1.1} />
 		<a href="mailto://me@danielpower.ca">me@danielpower.ca</a>
@@ -20,6 +16,10 @@
 	<span class="badge">
 		<Fa icon={faGithub} scale={1.1} />
 		<a href="https://www.github.com/danielpower">danielpower</a>
+	</span>
+	<span class="badge">
+		<Fa icon={faLinkedin} scale={1.1} />
+    <a href ="https://www.linkedin.com/in/danielpowernl">danielpowernl</a>
 	</span>
 </div>
 <h2>Experience</h2>
@@ -96,10 +96,10 @@
 
 	@media screen and (max-width: 740px) {
 		.badge {
-			width: 200px;
+			width: 210px;
 		}
 		.badges {
-			max-width: 400px;
+			max-width: 420px;
 			justify-content: left;
 		}
 	}
