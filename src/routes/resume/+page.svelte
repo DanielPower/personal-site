@@ -82,7 +82,6 @@
 	.badges {
 		display: flex;
 		justify-content: space-between;
-		margin-bottom: 1rem;
 		flex-wrap: wrap;
 		row-gap: 0.5rem;
 	}
@@ -90,7 +89,6 @@
 	.job {
 		display: flex;
 		justify-content: space-between;
-		margin: 1rem 0 1rem 0;
 		transition: ease all 0.25s;
 	}
 

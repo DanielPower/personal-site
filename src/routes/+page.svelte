@@ -31,6 +31,5 @@
 	.group {
 		display: flex;
 		flex-direction: column;
-		margin: 1rem 0 1rem 0;
 	}
 </style>
