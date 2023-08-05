@@ -22,7 +22,7 @@ body {
 	margin: var(--gutter) auto var(--gutter) auto;
 	max-width: min(800px, calc(100% - var(--gutter) * 2));
 	flex-direction: column;
-	transition: ease all .25s;
+	transition: ease all 0.25s;
 }
 
 a {

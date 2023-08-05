@@ -19,7 +19,7 @@
 	</span>
 	<span class="badge">
 		<Fa icon={faLinkedin} scale={1.1} />
-    <a href ="https://www.linkedin.com/in/danielpowernl">danielpowernl</a>
+		<a href="https://www.linkedin.com/in/danielpowernl">danielpowernl</a>
 	</span>
 </div>
 <h2>Experience</h2>
