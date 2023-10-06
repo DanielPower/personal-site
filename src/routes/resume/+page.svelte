@@ -7,7 +7,7 @@
 <div class="badges">
 	<span class="badge">
 		<Fa icon={faEnvelope} scale={1.1} />
-		<a href="mailto://me@danielpower.ca">me@danielpower.ca</a>
+		<a href="mailto://me+resume@danielpower.ca">me@danielpower.ca</a>
 	</span>
 	<span class="badge">
 		<Fa icon={faGlobe} scale={1.1} />
