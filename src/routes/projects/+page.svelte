@@ -6,7 +6,9 @@
 	import eclipseThumb from '$lib/assets/eclipse.png?w=300&format=webp';
 	import orbsOrig from '$lib/assets/orbs.png';
 	import orbsThumb from '$lib/assets/orbs.png?w=300&format=webp';
-	import { faDiscord, faGithub, faItchIo } from '@fortawesome/free-brands-svg-icons';
+	import motionOrig from '$lib/assets/motion.jpg';
+	import motionThumb from '$lib/assets/motion.jpg?w=300&format=webp';
+	import { faDiscord, faGithub, faGitlab, faItchIo } from '@fortawesome/free-brands-svg-icons';
 	import { faGamepad, faGlobe } from '@fortawesome/free-solid-svg-icons';
 </script>
 
@@ -73,7 +75,9 @@
 		puzzle is released. I've been participating since 2020.
 	</p>
 	<p>
-		In 2021 and 2022 I used it as an opportunity to learn pure functional programming in Haskell.
+		I like to use Advent of Code as an opportunity to practice a new language or programming
+		paradigm. In 2019 I wrote my solutions in Rust. In 2021 and 2022 I used it as an opportunity to
+		learn pure functional programming in Haskell.
 	</p>
 	<div class="links">
 		<a href="https://github.com/DanielPower/AdventOfCode2022"
@@ -84,6 +88,9 @@
 		>
 		<a href="https://github.com/DanielPower/AdventOfCode2020"
 			><Fa fw icon={faGithub} /> 2020 solutions in Typescript</a
+		>
+		<a href="https://gitlab.com/DanielPower/advent-2019"
+			><Fa fw icon={faGitlab} /> 2019 solutions in Rust</a
 		>
 	</div>
 </div>
@@ -107,7 +114,32 @@
 </div>
 
 <div class="project">
-	<h1>Keeb Pro (2022)</h1>
+	<h1>Opine (2022)</h1>
+	<p>
+		A global state management library for React. It is inspired by <a
+			href="https://github.com/pmndrs/zustand">zustand</a
+		>, but with the goal of providing an intuitive API around a strictly sliced store structure
+		which is more suitable to large projects.
+	</p>
+	<p>
+		Zustand allows for a sliced store structure, but it does not prevent actions from modifying
+		state outside of their slice. Opine enforces a strict structure where each slice contains
+		mutations that can only affect that slice. Actions that should affect multiple slices are
+		performed using composition. This makes it easier to reason about the flow of data through the
+		store.
+	</p>
+	<p>
+		Opine is written in Typescript. It uses the modern useExternalSyncStore hook to inform React of
+		state changes. It has built-in support for Redux's dev tools.
+	</p>
+	<p>Opine is currently a work in progress, and is not yet ready for use.</p>
+	<div class="links">
+		<a href="https://github.com/DanielPower/opine"><Fa fw icon={faGithub} /> Repository</a>
+	</div>
+</div>
+
+<div class="project">
+	<h1>Keeb Pro (2020)</h1>
 	<a href={keebProOrig}><img class="thumb" src={keebProThumb} alt="Screenshot of Keeb Pro" /></a>
 	<p>
 		A typing test built with svelte. It prompts the user to type a random selection of common
@@ -116,6 +148,36 @@
 	<div class="links">
 		<a href="https://github.com/danielpower/keeb-pro"><Fa fw icon={faGithub} /> Repository</a>
 		<a href="https://keeb.danielpower.ca"><Fa fw icon={faGlobe} /> App</a>
+	</div>
+</div>
+
+<div class="project">
+	<h1>Xorg Autopulse (2018)</h1>
+	<p>
+		A linux utility which automatically changes the audio output device for a given application
+		based on which display its window is on. This is useful if you have a TV connected to your
+		computer, and want to automatically switch the audio output to the TV when you drag a video
+		player to it.
+	</p>
+	<p>
+		Since most Linux distributions now ship Wayland instead of Xorg, and Pipewire instead of
+		Pulseaudio, this tool will no longer work on modern systems.
+	</p>
+	<div class="links">
+		<a href="https://gitlab.com/DanielPower/autopulse"><Fa fw icon={faGitlab} /> Repository</a>
+	</div>
+</div>
+
+<div class="project">
+	<h1>Motion (2017)</h1>
+	<a href={motionOrig}><img class="thumb" src={motionThumb} alt="Screenshot of Motion" /></a>
+	<p>
+		Motion is an animation library for the Love2D game framework. It includes a companion GUI tool
+		for composing animations from spritesheets. Motion allows callbacks to be registered for
+		animation events, such as the end of a loop.
+	</p>
+	<div class="links">
+		<a href="https://gitlab.com/DanielPower/motion"><Fa fw icon={faGitlab} /> Repository</a>
 	</div>
 </div>
 
