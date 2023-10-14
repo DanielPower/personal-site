@@ -11,11 +11,11 @@
 	</span>
 	<span class="badge">
 		<Fa icon={faGlobe} scale={1.1} />
-		<a href="https://www.danielpower.ca">danielpower.ca</a>
+		<a href="https://danielpower.ca">danielpower.ca</a>
 	</span>
 	<span class="badge">
 		<Fa icon={faGithub} scale={1.1} />
-		<a href="https://www.github.com/danielpower">danielpower</a>
+		<a href="https://github.com/danielpower">danielpower</a>
 	</span>
 	<span class="badge">
 		<Fa icon={faLinkedin} scale={1.1} />
