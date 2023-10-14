@@ -102,7 +102,7 @@
 
 <div class="project">
 	<h1>Keeb Pro (2022)</h1>
-	<img class="thumb" src="/keeb-pro.jpg" alt="Screenshot of Keeb Pro" />
+	<img class="thumb" src="/keeb-pro.png" alt="Screenshot of Keeb Pro" />
 	<p>
 		A typing test built with svelte. It prompts the user to type a random selection of common
 		English words, and displays the user's typing speed in words per minute.
