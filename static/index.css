@@ -42,28 +42,24 @@ a:hover {
 }
 
 h1 {
-	font-size: 1.35rem;
+	font-size: 1.25rem;
 	font-weight: 150;
 }
 
 h2 {
-	font-size: 1.25rem;
+	font-size: 1.2rem;
 	font-weight: 130;
 }
 
 h3 {
 	font-size: 1.15rem;
-	font-weight: 130;
+	font-weight: 120;
 }
 
 h4 {
 	font-size: 1.1rem;
-	font-weight: 115;
-	font-decoration: italic;
-}
-
-p {
-	text-align: justify;
+	font-weight: 110;
+	font-style: italic;
 }
 
 img {
