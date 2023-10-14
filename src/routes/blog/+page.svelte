@@ -6,11 +6,13 @@
 	};
 </script>
 
-{#each data.posts as post}
-	<div>
-		{post.metadata.date}
-		<a href={`blog/${post.file}`}>
-			{post.metadata.title}
-		</a>
-	</div>
-{/each}
+<div>
+	{#each data.posts as post}
+		<div>
+			{post.metadata.date}
+			<a href={`blog/${post.file}`}>
+				{post.metadata.title}
+			</a>
+		</div>
+	{/each}
+</div>
