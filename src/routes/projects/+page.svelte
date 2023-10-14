@@ -1,5 +1,11 @@
 <script>
 	import Fa from 'svelte-fa';
+	import keebProOrig from '$lib/assets/keeb-pro.png';
+	import keebProThumb from '$lib/assets/keeb-pro.png?w=300&format=webp';
+	import eclipseOrig from '$lib/assets/eclipse.png';
+	import eclipseThumb from '$lib/assets/eclipse.png?w=300&format=webp';
+	import orbsOrig from '$lib/assets/orbs.png';
+	import orbsThumb from '$lib/assets/orbs.png?w=300&format=webp';
 	import { faDiscord, faGithub, faItchIo } from '@fortawesome/free-brands-svg-icons';
 	import { faGamepad, faGlobe } from '@fortawesome/free-solid-svg-icons';
 </script>
@@ -26,7 +32,7 @@
 
 <div class="project">
 	<h1>Eclipse (2023)</h1>
-	<img class="thumb" src="/eclipse.png" alt="Screenshot of Eclipse" />
+	<a href={eclipseOrig}><img class="thumb" src={eclipseThumb} alt="Screenshot of Eclipse" /></a>
 	<p>
 		A tool for visualizing GLSL shaders. It is written in Lua using the Love2D framework. It is
 		designed to be compatible with shaders from <a href="https://www.shadertoy.com">ShaderToy</a>
@@ -40,7 +46,7 @@
 
 <div class="project">
 	<h1>Orbs in Space - Love2D Game Jam entry (2023)</h1>
-	<img class="thumb" src="/orbs.png" alt="Screenshot of Orbs in Space" />
+	<a href={orbsOrig}><img class="thumb" src={orbsThumb} alt="Screenshot of Orbs in Space" /></a>
 	<p>
 		A game made for the <a href="https://itch.io/jam/love2d-jam-2023">Love2D Jam 2023.</a>
 		The theme is "Connection".
@@ -102,7 +108,7 @@
 
 <div class="project">
 	<h1>Keeb Pro (2022)</h1>
-	<img class="thumb" src="/keeb-pro.png" alt="Screenshot of Keeb Pro" />
+	<a href={keebProOrig}><img class="thumb" src={keebProThumb} alt="Screenshot of Keeb Pro" /></a>
 	<p>
 		A typing test built with svelte. It prompts the user to type a random selection of common
 		English words, and displays the user's typing speed in words per minute.

@@ -27,6 +27,7 @@
 		"svelte-fa": "^3.0.4",
 		"typescript": "^5.1.6",
 		"vite": "^4.3.9",
+		"vite-imagetools": "^5.1.2",
 		"xml-js": "^1.6.11"
 	},
 	"dependencies": {
