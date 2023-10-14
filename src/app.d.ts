@@ -7,6 +7,15 @@ declare global {
 		// interface PageData {}
 		// interface Platform {}
 	}
+
+	declare module '*.png?thumbnail' {
+		const image: string;
+		export default image;
+	}
+	declare module '*.jpg?thumbnail' {
+		const image: string;
+		export default image;
+	}
 }
 
 export {};

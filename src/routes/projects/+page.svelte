@@ -1,13 +1,13 @@
 <script>
 	import Fa from 'svelte-fa';
 	import keebProOrig from '$lib/assets/keeb-pro.png';
-	import keebProThumb from '$lib/assets/keeb-pro.png?w=300&format=webp';
+	import keebProThumb from '$lib/assets/keeb-pro.png?thumbnail';
 	import eclipseOrig from '$lib/assets/eclipse.png';
-	import eclipseThumb from '$lib/assets/eclipse.png?w=300&format=webp';
+	import eclipseThumb from '$lib/assets/eclipse.png?thumbnail';
 	import orbsOrig from '$lib/assets/orbs.png';
-	import orbsThumb from '$lib/assets/orbs.png?w=300&format=webp';
+	import orbsThumb from '$lib/assets/orbs.png?thumbnail';
 	import motionOrig from '$lib/assets/motion.jpg';
-	import motionThumb from '$lib/assets/motion.jpg?w=300&format=webp';
+	import motionThumb from '$lib/assets/motion.jpg?thumbnail';
 	import { faDiscord, faGithub, faGitlab, faItchIo } from '@fortawesome/free-brands-svg-icons';
 	import { faGamepad, faGlobe } from '@fortawesome/free-solid-svg-icons';
 </script>
