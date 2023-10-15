@@ -5,13 +5,16 @@ export const fetchMarkdownPosts = async () => {
 	const iterablePostFiles = Object.entries(allPostFiles);
 
 	return Promise.all(
-		iterablePostFiles.map(async ([path, resolver]) => {
-			const file = path.split('/').at(-1)?.split('.').at(0)!;
-			const { metadata } = await resolver();
-			return {
-				metadata,
-				file
-			};
-		})
+		iterablePostFiles
+			.map(async ([path, resolver]) => {
+				const file = path.split('/').at(-1)?.split('.').at(0);
+				if (!file) return;
+				const { metadata } = await resolver();
+				return {
+					metadata,
+					file
+				};
+			})
+			.filter(Boolean)
 	);
 };
