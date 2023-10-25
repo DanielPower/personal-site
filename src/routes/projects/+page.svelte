@@ -69,7 +69,7 @@
 </div>
 
 <div class="project">
-	<h1>Advent of Code Solutions (2020-2022)</h1>
+	<h1>Advent of Code Solutions (2019-2022)</h1>
 	<p>
 		Advent of Code is a yearly programming challenge. Each day in December, a new Christmas themed
 		puzzle is released. I've been participating since 2020.
