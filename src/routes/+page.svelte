@@ -10,7 +10,7 @@
 
 <div class="group">
 	Social
-	<a href="mailto://me@danielpower.ca"><Fa fw icon={faEnvelope} /> Email</a>
+	<a href="mailto://me+homepage@danielpower.ca"><Fa fw icon={faEnvelope} /> Email</a>
 	<a href="https://www.instagram.com/ifcoffeethendan/"><Fa fw icon={faInstagram} /> Instagram</a>
 	<a href="https://www.mastodon.online/@CrispyUmbrella"><Fa fw icon={faMastodon} /> Mastodon</a>
 </div>
