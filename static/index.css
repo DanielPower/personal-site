@@ -3,7 +3,7 @@
 	--color-fg: #000000;
 	--color-url: #0c4999;
 	--gutter: 2rem;
-	--content-width: calc(min(800px, 100% - var(--gutter) * 2));
+	--content-width: calc(min(960px, 100% - var(--gutter) * 2));
 }
 
 @font-face {

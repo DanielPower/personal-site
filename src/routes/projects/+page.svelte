@@ -69,7 +69,7 @@
 </div>
 
 <div class="project">
-	<h1>Advent of Code Solutions (2019-2022)</h1>
+	<h1>Advent of Code Solutions (2019-2023)</h1>
 	<p>
 		Advent of Code is a yearly programming challenge. Each day in December, a new Christmas themed
 		puzzle is released. I've been participating since 2020.
@@ -80,18 +80,7 @@
 		learn pure functional programming in Haskell.
 	</p>
 	<div class="links">
-		<a href="https://github.com/DanielPower/AdventOfCode2022"
-			><Fa fw icon={faGithub} /> 2022 solutions in Haskell</a
-		>
-		<a href="https://github.com/DanielPower/AdventOfCode2021"
-			><Fa fw icon={faGithub} /> 2021 solutions in Haskell</a
-		>
-		<a href="https://github.com/DanielPower/AdventOfCode2020"
-			><Fa fw icon={faGithub} /> 2020 solutions in Typescript</a
-		>
-		<a href="https://gitlab.com/DanielPower/advent-2019"
-			><Fa fw icon={faGitlab} /> 2019 solutions in Rust</a
-		>
+		<a href="https://github.com/DanielPower/AdventOfCode"><Fa fw icon={faGithub} /> Repository</a>
 	</div>
 </div>
 
