@@ -4,7 +4,7 @@
 
 	const menuItems = [
 		{ title: 'About', url: '/' },
-		{ title: 'Blog', url: '/blog' },
+		// { title: 'Blog', url: '/blog' },
 		{ title: 'Projects', url: '/projects' },
 		{ title: 'Resume', url: '/resume' }
 	];
