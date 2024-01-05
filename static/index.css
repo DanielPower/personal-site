@@ -23,6 +23,7 @@
 html,
 body {
 	height: 100%;
+	line-height: 1.25;
 }
 
 html {
@@ -66,11 +67,9 @@ img {
 	max-width: 100%;
 }
 
-@media screen and (max-width: calc(800px + 4rem)) {
-	ol,
-	ul {
-		list-style-position: inside;
-	}
+ol,
+ul {
+	padding-left: 1rem;
 }
 
 @media screen and (max-width: 650px) {

@@ -4,19 +4,21 @@
 
 	const menuItems = [
 		{ title: 'About', url: '/' },
-		// { title: 'Blog', url: '/blog' },
+		{ title: 'Blog', url: '/blog' },
 		{ title: 'Projects', url: '/projects' },
 		{ title: 'Resume', url: '/resume' }
 	];
 </script>
 
 <div class="container">
-	<header>Daniel Power</header>
-	<nav>
-		{#each menuItems as menuItem}
-			<a class:active={menuItem.url === $page.route.id} href={menuItem.url}>{menuItem.title}</a>
-		{/each}
-	</nav>
+	<div class="topbar">
+		<span class="name">Daniel Power</span>
+		<nav>
+			{#each menuItems as menuItem}
+				<a class:active={menuItem.url === $page.route.id} href={menuItem.url}>{menuItem.title}</a>
+			{/each}
+		</nav>
+	</div>
 	<div class="content">
 		<slot />
 	</div>
@@ -42,8 +44,14 @@
 		flex-grow: 1;
 	}
 
-	header {
-		font-size: 2rem;
+	.name {
+		font-size: 1.5rem;
+	}
+
+	.topbar {
+		display: flex;
+		align-items: end;
+		gap: 1rem;
 	}
 
 	nav {
