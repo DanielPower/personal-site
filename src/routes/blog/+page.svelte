@@ -38,12 +38,16 @@
 				</h3>
 				{#each days.entries() as [day, posts]}
 					<div>
-						{day}
-						{#each posts as post}
-							<a href={`blog/${post.file}`}>
-								{post.metadata.title}
-							</a>
-						{/each}
+						<div class="day">
+							{day}
+							<div class="posts">
+								{#each posts as post}
+									<a href={`blog/${post.file}`}>
+										{post.metadata.title}
+									</a>
+								{/each}
+							</div>
+						</div>
 					</div>
 				{/each}
 			</div>
@@ -59,5 +63,15 @@
 
 	.month {
 		margin-bottom: 1rem;
+	}
+
+	.day {
+		display: flex;
+		gap: 0.5rem;
+	}
+
+	.posts {
+		display: flex;
+		flex-direction: column;
 	}
 </style>
