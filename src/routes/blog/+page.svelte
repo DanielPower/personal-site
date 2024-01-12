@@ -5,7 +5,6 @@
 		posts: Post[];
 	};
 
-	console.log(data.posts);
 	const years: Map<string, { months: Map<string, { days: Map<string, Post[]> }> }> = new Map();
 	data.posts.forEach((post) => {
 		const [yyyy, mm, dd] = post.metadata.date.split('-');
@@ -24,17 +23,15 @@
 		const day = days.get(dd)!;
 		day.push(post);
 	});
-
-	console.log(years);
 </script>
 
 <div>
 	{#each years.entries() as [year, { months }]}
 		{#each months.entries() as [month, { days }], monthIndex}
 			<div class="month">
-				<h3 class="month-header">
-					<span>{month}</span>
-					{#if monthIndex === 0}<span>{year}</span>{/if}
+				<h3>
+					{month}
+					{#if monthIndex === 0}{year}{/if}
 				</h3>
 				{#each days.entries() as [day, posts]}
 					<div>
@@ -56,11 +53,6 @@
 </div>
 
 <style>
-	.month-header {
-		display: flex;
-		justify-content: space-between;
-	}
-
 	.month {
 		margin-bottom: 1rem;
 	}

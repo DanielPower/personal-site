@@ -72,4 +72,11 @@
 			display: none;
 		}
 	}
+
+	@media (max-width: 650px) {
+		.topbar {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+	}
 </style>
