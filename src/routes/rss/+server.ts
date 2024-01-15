@@ -3,8 +3,6 @@ import { fetchMarkdownPosts } from '../../util/posts';
 import { js2xml } from 'xml-js';
 import type { RequestHandler } from './$types';
 
-export const prerender = true;
-
 const renderRss = (posts: (Post & { html: string })[], origin: string) =>
 	js2xml(
 		{
