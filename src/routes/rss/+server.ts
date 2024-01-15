@@ -3,6 +3,8 @@ import { fetchMarkdownPosts } from '../../util/posts';
 import { js2xml } from 'xml-js';
 import type { RequestHandler } from './$types';
 
+export const prerender = true;
+
 const renderRss = (posts: (Post & { html: string })[], origin: string) =>
 	js2xml(
 		{
@@ -43,9 +45,7 @@ const renderRss = (posts: (Post & { html: string })[], origin: string) =>
 
 export const GET: RequestHandler = async ({ url }) => {
 	const posts = await Promise.all(
-		(
-			await fetchMarkdownPosts()
-		)
+		(await fetchMarkdownPosts())
 			.sort((a, b) => +new Date(b.metadata.date) - +new Date(a.metadata.date))
 			.map(async (post) => ({
 				...post,
