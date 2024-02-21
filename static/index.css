@@ -69,6 +69,21 @@ ul {
 	padding-left: 1rem;
 }
 
+figcaption {
+	font-size: 0.8em;
+	background-color: #444444;
+	padding: 0.25rem;
+	color: #f2f2f2;
+}
+
+figcaption a {
+	color: #b2b2ff;
+}
+
+figcaption a:hover {
+	color: #e5e5ff;
+}
+
 @media screen and (max-width: 650px) {
 	:root {
 		--gutter: 1rem;
