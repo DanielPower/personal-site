@@ -9,7 +9,6 @@
 {#await Promise.all([imagePromise, thumbPromise])}
 	<p>Loading...</p>
 {:then [image, thumb]}
-	{console.log(image)}
 	<figure>
 		<a href={image.default}>
 			<img src={thumb.default} {alt} />
