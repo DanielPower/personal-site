@@ -1,17 +1,24 @@
 <script lang="ts">
-	export let thumb: string;
 	export let src: string;
 	export let alt: string;
+
+	const imagePromise = import(`$lib/assets/${src}.jpg`);
+	const thumbPromise = import(`$lib/assets/${src}.jpg?w=960&format=webp`);
 </script>
 
-<figure>
-	<a href={src}>
-		<img src={thumb} {alt} />
-	</a>
-	{#if $$slots.default}
-		<figcaption><slot /></figcaption>
-	{/if}
-</figure>
+{#await Promise.all([imagePromise, thumbPromise])}
+	<p>Loading...</p>
+{:then [image, thumb]}
+	{console.log(image)}
+	<figure>
+		<a href={image.default}>
+			<img src={thumb.default} {alt} />
+		</a>
+		{#if $$slots.default}
+			<figcaption><slot /></figcaption>
+		{/if}
+	</figure>
+{/await}
 
 <style>
 	figure {
