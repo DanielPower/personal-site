@@ -1,10 +1,13 @@
 <script lang="ts">
+	export let thumb: string;
 	export let src: string;
 	export let alt: string;
 </script>
 
 <figure>
-	<img {src} {alt} />
+	<a href={src}>
+		<img src={thumb} {alt} />
+	</a>
 	{#if $$slots.default}
 		<figcaption><slot /></figcaption>
 	{/if}

@@ -10,6 +10,9 @@ export default defineConfig({
 				if (id.searchParams.has('thumbnail')) {
 					return new URLSearchParams('w=300&format=webp');
 				}
+				if (id.searchParams.has('full')) {
+					return new URLSearchParams('w=960&format=webp');
+				}
 				return new URLSearchParams();
 			}
 		})
