@@ -8,6 +8,8 @@
 		{ title: 'Projects', url: '/projects' },
 		{ title: 'Resume', url: '/resume' }
 	];
+
+  const year = new Date().getFullYear();
 </script>
 
 <div class="container">
@@ -22,7 +24,7 @@
 	<div class="content">
 		<slot />
 	</div>
-	<footer>Copyright © 2023, Daniel Power</footer>
+	<footer>Copyright © {year}, Daniel Power</footer>
 </div>
 
 <style>
