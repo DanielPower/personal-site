@@ -1,23 +1,32 @@
 <script>
+	import Fa from "svelte-fa";
 	import { faEnvelope, faGlobe } from "@fortawesome/free-solid-svg-icons";
 	import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
-	import ResumeBadge from "./ResumeBadge.svelte";
+
+	const badges = [
+		{
+			icon: faEnvelope,
+			href: "mailto:me+resume@danielpower.ca",
+			text: "me@danielpower.ca",
+		},
+		{ icon: faGlobe, href: "https://danielpower.ca", text: "danielpower.ca" },
+		{
+			icon: faGithub,
+			href: "https://github.com/daniel-power",
+			text: "daniel-power",
+		},
+		{
+			icon: faLinkedin,
+			href: "https://www.linkedin.com/in/danielpowernl",
+			text: "danielpowernl",
+		},
+	];
 </script>
 
 <div class="badges">
-	<ResumeBadge icon={faEnvelope} href="mailto:me+resume@danielpower.ca">
-		me@danielpower.ca</ResumeBadge
-	>
-	<ResumeBadge icon={faGlobe} href="https://danielpower.ca"
-		>danielpower.ca</ResumeBadge
-	>
-	<ResumeBadge icon={faGithub} href="https://github.com/danielpower"
-		>danielpower</ResumeBadge
-	>
-	<ResumeBadge
-		icon={faLinkedin}
-		href="https://www.linkedin.com/in/danielpowernl">danielpowernl</ResumeBadge
-	>
+	{#each badges as { icon, href, text }}
+		<a class="badge" {href}><Fa {icon} scale={1.1} /> {text}</a>
+	{/each}
 </div>
 <h2>Experience</h2>
 <h3>CoLab Software</h3>
