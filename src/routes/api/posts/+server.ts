@@ -1,5 +1,5 @@
-import { json } from '@sveltejs/kit';
-import { fetchMarkdownPosts } from '../../../util/posts';
+import { json } from "@sveltejs/kit";
+import { fetchMarkdownPosts } from "../../../util/posts";
 
 export const GET = async () => {
 	const allPosts = await fetchMarkdownPosts();

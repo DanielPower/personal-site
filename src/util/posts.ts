@@ -1,4 +1,4 @@
-import type { Post } from '../../types';
+import type { Post } from "../../types";
 
 export const fetchMarkdownPosts = async () => {
 	const allPostFiles = import.meta.glob<Post>(`/posts/*.md`);
@@ -7,14 +7,14 @@ export const fetchMarkdownPosts = async () => {
 	return Promise.all(
 		iterablePostFiles
 			.map(async ([path, resolver]) => {
-				const file = path.split('/').at(-1)?.split('.').at(0);
+				const file = path.split("/").at(-1)?.split(".").at(0);
 				if (!file) return;
 				const { metadata } = await resolver();
 				return {
 					metadata,
-					file
+					file,
 				};
 			})
-			.filter(Boolean)
+			.filter(Boolean),
 	);
 };

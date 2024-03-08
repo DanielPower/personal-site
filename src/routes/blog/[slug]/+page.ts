@@ -1,4 +1,4 @@
-import { error, type Load } from '@sveltejs/kit';
+import { error, type Load } from "@sveltejs/kit";
 
 export const load: Load = async ({ params }) => {
 	if (!params.slug) {
@@ -10,6 +10,6 @@ export const load: Load = async ({ params }) => {
 	return {
 		title,
 		date,
-		content
+		content,
 	};
 };

@@ -8,11 +8,11 @@ declare global {
 		// interface Platform {}
 	}
 
-	declare module '*.png?thumbnail' {
+	declare module "*.png?thumbnail" {
 		const image: string;
 		export default image;
 	}
-	declare module '*.jpg?thumbnail' {
+	declare module "*.jpg?thumbnail" {
 		const image: string;
 		export default image;
 	}

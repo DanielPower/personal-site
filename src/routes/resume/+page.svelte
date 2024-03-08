@@ -1,18 +1,22 @@
 <script>
-	import Fa from 'svelte-fa';
-	import { faEnvelope, faGlobe } from '@fortawesome/free-solid-svg-icons';
-	import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
-	import ResumeBadge from './ResumeBadge.svelte';
+	import { faEnvelope, faGlobe } from "@fortawesome/free-solid-svg-icons";
+	import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
+	import ResumeBadge from "./ResumeBadge.svelte";
 </script>
 
 <div class="badges">
 	<ResumeBadge icon={faEnvelope} href="mailto:me+resume@danielpower.ca">
 		me@danielpower.ca</ResumeBadge
 	>
-	<ResumeBadge icon={faGlobe} href="https://danielpower.ca">danielpower.ca</ResumeBadge>
-	<ResumeBadge icon={faGithub} href="https://github.com/danielpower">danielpower</ResumeBadge>
-	<ResumeBadge icon={faLinkedin} href="https://www.linkedin.com/in/danielpowernl"
-		>danielpowernl</ResumeBadge
+	<ResumeBadge icon={faGlobe} href="https://danielpower.ca"
+		>danielpower.ca</ResumeBadge
+	>
+	<ResumeBadge icon={faGithub} href="https://github.com/danielpower"
+		>danielpower</ResumeBadge
+	>
+	<ResumeBadge
+		icon={faLinkedin}
+		href="https://www.linkedin.com/in/danielpowernl">danielpowernl</ResumeBadge
 	>
 </div>
 <h2>Experience</h2>
@@ -21,22 +25,26 @@
 	<span>Senior Software Developer</span>
 	<span>December 2022 - Present</span>
 </div>
-<p>Focused on developer experience and improving productivity and quality across the team.</p>
+<p>
+	Focused on developer experience and improving productivity and quality across
+	the team.
+</p>
 <div class="job">
 	<span>Intermediate Software Developer</span>
 	<span>August 2022 - December 2022</span>
 </div>
 <p>
-	Created an in-house global state management system for React, with inspirations from Redux and
-	Zustant, but with a simpler API to ease adoption and education to the team.
+	Created an in-house global state management system for React, with
+	inspirations from Redux and Zustant, but with a simpler API to ease adoption
+	and education to the team.
 </p>
 <div class="job">
 	<span>Junior Full Stack Developer</span>
 	<span>September 2019 - August 2022</span>
 </div>
 <p>
-	Created a library for rendering and manipulating property-based markup over arbitrary document and
-	model viewing technologies.
+	Created a library for rendering and manipulating property-based markup over
+	arbitrary document and model viewing technologies.
 </p>
 <div class="job">
 	<span>Full Stack Developer Intern</span>
@@ -48,16 +56,16 @@
 	<span>September 2021 - December 2021</span>
 </div>
 <p>
-	Debugged and graded student assignemnts for 3rd year course on heuristic search based artificial
-	intelligence.
+	Debugged and graded student assignemnts for 3rd year course on heuristic
+	search based artificial intelligence.
 </p>
 <div class="job">
 	<span>Research Assistant</span>
 	<span>June 2019 - September 2019</span>
 </div>
 <p>
-	Used predictive nueral networks as a model of the human visual system for the purpose of studying
-	the brains of people with schizophrenia.
+	Used predictive nueral networks as a model of the human visual system for the
+	purpose of studying the brains of people with schizophrenia.
 </p>
 
 <style>

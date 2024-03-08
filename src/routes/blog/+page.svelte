@@ -1,14 +1,19 @@
 <script lang="ts">
-	import type { Post } from '../../../types';
+	import type { Post } from "../../../types";
 
 	export let data: {
 		posts: Post[];
 	};
 
-	const years: Map<string, { months: Map<string, { days: Map<string, Post[]> }> }> = new Map();
+	const years: Map<
+		string,
+		{ months: Map<string, { days: Map<string, Post[]> }> }
+	> = new Map();
 	data.posts.forEach((post) => {
-		const [yyyy, mm, dd] = post.metadata.date.split('-');
-		const month = new Date(0, parseInt(mm, 10) - 1).toLocaleString('default', { month: 'long' });
+		const [yyyy, mm, dd] = post.metadata.date.split("-");
+		const month = new Date(0, parseInt(mm, 10) - 1).toLocaleString("default", {
+			month: "long",
+		});
 		if (!years.has(yyyy)) {
 			years.set(yyyy, { months: new Map() });
 		}

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { IconDefinition } from '@fortawesome/free-brands-svg-icons';
-	import Fa from 'svelte-fa';
+	import type { IconDefinition } from "@fortawesome/free-brands-svg-icons";
+	import Fa from "svelte-fa";
 
 	export let href: string;
 	export let icon: IconDefinition;

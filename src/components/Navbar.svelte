@@ -1,17 +1,19 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from "$app/stores";
 	const menuItems = [
-		{ title: 'About', url: '/' },
-		{ title: 'Blog', url: '/blog' },
-		{ title: 'Projects', url: '/projects' },
-		{ title: 'Resume', url: '/resume' }
+		{ title: "About", url: "/" },
+		{ title: "Blog", url: "/blog" },
+		{ title: "Projects", url: "/projects" },
+		{ title: "Resume", url: "/resume" },
 	];
 </script>
 
 <nav>
 	{#each menuItems as menuItem}
-		<a class:active={menuItem.url === $page.route.id} href={menuItem.url} data-text={menuItem.title}
-			>{menuItem.title}</a
+		<a
+			class:active={menuItem.url === $page.route.id}
+			href={menuItem.url}
+			data-text={menuItem.title}>{menuItem.title}</a
 		>
 	{/each}
 </nav>
