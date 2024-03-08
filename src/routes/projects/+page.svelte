@@ -53,7 +53,7 @@
 		>
 	</p>
 	<div class="links">
-		<a href="https://github.com/DanielPower/react-state-talk">
+		<a href="https://github.com/DanielPower/eclipse">
 			<Fa fw icon={faGithub} /> Repository
 		</a>
 	</div>
