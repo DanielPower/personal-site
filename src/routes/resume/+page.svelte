@@ -107,4 +107,10 @@
 			flex-direction: column;
 		}
 	}
+
+	@media print {
+		:global(html) {
+			font-size: 12px;
+		}
+	}
 </style>

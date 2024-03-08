@@ -9,7 +9,7 @@
 		{ title: 'Resume', url: '/resume' }
 	];
 
-  const year = new Date().getFullYear();
+	const year = new Date().getFullYear();
 </script>
 
 <div class="container">
@@ -71,6 +71,9 @@
 
 	@media print {
 		nav {
+			display: none;
+		}
+		footer {
 			display: none;
 		}
 	}
