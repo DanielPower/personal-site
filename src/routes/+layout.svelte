@@ -17,7 +17,11 @@
 		<span class="name">Daniel Power</span>
 		<nav>
 			{#each menuItems as menuItem}
-				<a class:active={menuItem.url === $page.route.id} href={menuItem.url}>{menuItem.title}</a>
+				<a
+					class:active={menuItem.url === $page.route.id}
+					href={menuItem.url}
+					data-text={menuItem.title}>{menuItem.title}</a
+				>
 			{/each}
 		</nav>
 	</div>
@@ -61,8 +65,27 @@
 		gap: 1rem;
 	}
 
-	nav .active {
+	nav a {
+		position: relative;
+		text-align: center;
+	}
+
+	nav a.active {
+		visibility: hidden;
+	}
+
+	nav a::after {
+		content: attr(data-text);
+		position: absolute;
+		visibility: hidden;
+		left: 50%;
+		top: 0;
+		transform: translateX(-50%);
 		font-weight: 700;
+	}
+
+	nav a.active::after {
+		visibility: visible;
 	}
 
 	footer {
