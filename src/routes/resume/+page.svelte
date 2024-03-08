@@ -2,25 +2,18 @@
 	import Fa from 'svelte-fa';
 	import { faEnvelope, faGlobe } from '@fortawesome/free-solid-svg-icons';
 	import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
+	import ResumeBadge from './ResumeBadge.svelte';
 </script>
 
 <div class="badges">
-	<span class="badge">
-		<Fa icon={faEnvelope} scale={1.1} />
-		<a href="mailto:me+resume@danielpower.ca">me@danielpower.ca</a>
-	</span>
-	<span class="badge">
-		<Fa icon={faGlobe} scale={1.1} />
-		<a href="https://danielpower.ca">danielpower.ca</a>
-	</span>
-	<span class="badge">
-		<Fa icon={faGithub} scale={1.1} />
-		<a href="https://github.com/danielpower">danielpower</a>
-	</span>
-	<span class="badge">
-		<Fa icon={faLinkedin} scale={1.1} />
-		<a href="https://www.linkedin.com/in/danielpowernl">danielpowernl</a>
-	</span>
+	<ResumeBadge icon={faEnvelope} href="mailto:me+resume@danielpower.ca">
+		me@danielpower.ca</ResumeBadge
+	>
+	<ResumeBadge icon={faGlobe} href="https://danielpower.ca">danielpower.ca</ResumeBadge>
+	<ResumeBadge icon={faGithub} href="https://github.com/danielpower">danielpower</ResumeBadge>
+	<ResumeBadge icon={faLinkedin} href="https://www.linkedin.com/in/danielpowernl"
+		>danielpowernl</ResumeBadge
+	>
 </div>
 <h2>Experience</h2>
 <h3>CoLab Software</h3>
@@ -66,12 +59,6 @@
 	Used predictive nueral networks as a model of the human visual system for the purpose of studying
 	the brains of people with schizophrenia.
 </p>
-<h2>Education</h2>
-<h3>Memorial University of Newfoundland</h3>
-<div class="job">
-	<span>Bachelor of Science - Computer Science</span>
-	<span>2012 - Present</span>
-</div>
 
 <style>
 	p {
