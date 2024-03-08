@@ -36,7 +36,9 @@
 				{#each days.entries() as [day, posts]}
 					<div>
 						<div class="day">
-							{day}
+							<div class="day-number">
+								{day}
+							</div>
 							<div class="posts">
 								{#each posts as post}
 									<a href={`blog/${post.file}`}>
@@ -60,6 +62,11 @@
 	.day {
 		display: flex;
 		gap: 0.5rem;
+	}
+
+	.day-number {
+		width: 1.5rem;
+		text-align: right;
 	}
 
 	.posts {
