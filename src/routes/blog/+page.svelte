@@ -10,7 +10,7 @@
 		{ months: Map<string, { days: Map<string, Post[]> }> }
 	> = new Map();
 	data.posts.forEach((post) => {
-		const [yyyy, mm, dd] = post.metadata.date.split("-");
+		const [yyyy, mm, dd] = post.meta.date.split("-");
 		const month = new Date(0, parseInt(mm, 10) - 1).toLocaleString("default", {
 			month: "long",
 		});
@@ -46,8 +46,8 @@
 							</div>
 							<div class="posts">
 								{#each posts as post}
-									<a href={`blog/${post.file}`}>
-										{post.metadata.title}
+									<a href={`blog/${post.slug}`}>
+										{post.meta.title}
 									</a>
 								{/each}
 							</div>

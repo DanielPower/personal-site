@@ -1,7 +1,8 @@
 export type Post = {
-	metadata: {
+	meta: {
 		title: string;
 		date: string;
 	};
-	file: string;
+	slug: string;
+	content: string;
 };

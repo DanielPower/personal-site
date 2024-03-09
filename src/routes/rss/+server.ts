@@ -1,5 +1,5 @@
 import type { Post } from "../../../types";
-import { fetchMarkdownPosts } from "../../util/posts";
+import { getPosts } from "$lib/server/posts";
 import { js2xml } from "xml-js";
 import type { RequestHandler } from "./$types";
 
@@ -29,10 +29,10 @@ const renderRss = (posts: (Post & { html: string })[], origin: string) =>
 						},
 					},
 					item: posts.map((post) => ({
-						title: post.metadata.title,
-						guid: post.file,
-						link: `${origin}/blog/${post.file}`,
-						pubDate: new Date(post.metadata.date).toUTCString(),
+						title: post.meta.title,
+						guid: post.slug,
+						link: `${origin}/blog/${post.slug}`,
+						pubDate: new Date(post.meta.date).toUTCString(),
 						description: post.html,
 					})),
 				},
@@ -43,13 +43,11 @@ const renderRss = (posts: (Post & { html: string })[], origin: string) =>
 
 export const GET: RequestHandler = async ({ url }) => {
 	const posts = await Promise.all(
-		(await fetchMarkdownPosts())
-			.sort((a, b) => +new Date(b.metadata.date) - +new Date(a.metadata.date))
-			.map(async (post) => ({
-				...post,
-				html: (await import(`../../../posts/${post.file}.md`)).default.render()
-					.html,
-			})),
+		getPosts().map(async (post) => ({
+			...post,
+			html: (await import(`../../../posts/${post.slug}.md`)).default.render()
+				.html,
+		})),
 	);
 
 	return new Response(renderRss(posts, url.origin), {
