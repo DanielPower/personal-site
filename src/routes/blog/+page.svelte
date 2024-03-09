@@ -8,7 +8,8 @@
 		string,
 		{ months: Map<string, { days: Map<string, Post[]> }> }
 	> = new Map();
-	data.posts.forEach((post) => {
+
+	$: data.posts.forEach((post) => {
 		const [yyyy, mm, dd] = post.date.split("-");
 		const month = new Date(0, parseInt(mm, 10) - 1).toLocaleString("default", {
 			month: "long",
@@ -34,7 +35,11 @@
 		<h3>Tags</h3>
 		<div class="tags">
 			{#each data.tags as tag}
-				<Chip label={tag.label} color={tag.color} />
+				<div class="tag">
+					<a data-sveltekit-reload href={`?tags=${tag.label}`}>
+						<Chip label={tag.label} color={tag.color} />
+					</a>
+				</div>
 			{/each}
 		</div>
 	</div>
@@ -71,13 +76,16 @@
 <style>
 	.container {
 		display: flex;
-		gap: 1rem;
+		gap: 2rem;
 	}
 	.tags {
-		width: 10rem;
+		width: 12rem;
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.25rem;
+		gap: 0.5rem;
+	}
+	.tag:hover {
+		filter: saturate(2) brightness(1.25);
 	}
 	.month {
 		margin-bottom: 1rem;
