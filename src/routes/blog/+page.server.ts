@@ -1,6 +1,6 @@
-import { getPosts } from "$lib/server/posts";
+import { getPosts, tags } from "$lib/server/posts";
 
 export const load = async () => {
 	const posts = getPosts();
-	return { posts };
+	return { posts, tags: [...tags.values()] };
 };

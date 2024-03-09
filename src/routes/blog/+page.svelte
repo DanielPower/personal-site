@@ -1,9 +1,8 @@
 <script lang="ts">
 	import type { Post } from "../../../types";
+	import Chip from "../../components/Chip.svelte";
 
-	export let data: {
-		posts: Post[];
-	};
+	export let data;
 
 	const years: Map<
 		string,
@@ -30,50 +29,67 @@
 	});
 </script>
 
-<div>
-	{#each years.entries() as [year, { months }]}
-		{#each months.entries() as [month, { days }], monthIndex}
-			<div class="month">
-				<h3>
-					{month}
-					{#if monthIndex === 0}{year}{/if}
-				</h3>
-				{#each days.entries() as [day, posts]}
-					<div>
-						<div class="day">
-							<div class="day-number">
-								{day}
-							</div>
-							<div class="posts">
-								{#each posts as post}
-									<a href={`blog/${post.slug}`}>
-										{post.title}
-									</a>
-								{/each}
+<div class="container">
+	<div>
+		<h3>Tags</h3>
+		<div class="tags">
+			{#each data.tags as tag}
+				<Chip label={tag.label} color={tag.color} />
+			{/each}
+		</div>
+	</div>
+	<div>
+		{#each years.entries() as [year, { months }]}
+			{#each months.entries() as [month, { days }], monthIndex}
+				<div class="month">
+					<h3>
+						{month}
+						{#if monthIndex === 0}{year}{/if}
+					</h3>
+					{#each days.entries() as [day, posts]}
+						<div>
+							<div class="day">
+								<div class="day-number">
+									{day}
+								</div>
+								<div class="posts">
+									{#each posts as post}
+										<a href={`blog/${post.slug}`}>
+											{post.title}
+										</a>
+									{/each}
+								</div>
 							</div>
 						</div>
-					</div>
-				{/each}
-			</div>
+					{/each}
+				</div>
+			{/each}
 		{/each}
-	{/each}
+	</div>
 </div>
 
 <style>
+	.container {
+		display: flex;
+		gap: 1rem;
+	}
+	.tags {
+		width: 10rem;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem;
+	}
 	.month {
 		margin-bottom: 1rem;
 	}
-
 	.day {
 		display: flex;
 		gap: 0.5rem;
 	}
-
 	.day-number {
 		width: 1.5rem;
 		text-align: right;
 	}
-
 	.posts {
 		display: flex;
 		flex-direction: column;

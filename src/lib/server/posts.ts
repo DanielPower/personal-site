@@ -23,15 +23,26 @@ const raw = await Promise.all(
 	Object.values(postFiles).map((resolver) => resolver()),
 );
 const markdown = await Promise.all(raw.map(parseMarkdown));
+
+export const tags = new Map(
+	markdown
+		.map((post) => post.meta.tags)
+		.flat()
+		.filter(Boolean)
+		.map((tag) => [
+			tag,
+			{
+				label: tag,
+				color: tagColors[assignToBucket(tag, tagColors.length)],
+			},
+		]),
+);
+
 const posts: Post[] = slugs
 	.map((slug, index) => ({
 		title: markdown[index].meta.title,
 		date: markdown[index].meta.date,
-		tags:
-			markdown[index].meta.tags?.map((tag) => ({
-				label: tag,
-				color: tagColors[assignToBucket(tag, tagColors.length)],
-			})) ?? [],
+		tags: markdown[index].meta.tags?.map((tag) => tags.get(tag)!) ?? [],
 		slug,
 		content: markdown[index].content,
 	}))
