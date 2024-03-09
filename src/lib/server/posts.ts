@@ -1,4 +1,16 @@
+import type { Post } from "../../../types";
+import { assignToBucket } from "./bucket";
 import { parseMarkdown } from "./markdown";
+
+const tagColors = [
+	"#faedcb",
+	"#c9e4de",
+	"#dbcdf0",
+	"#f2c6de",
+	"#ffadad",
+	"#ffd6a5",
+	"#fdffb6",
+];
 
 const postFiles = import.meta.glob<string>(`/posts/*.md`, {
 	query: "?raw",
@@ -11,13 +23,19 @@ const raw = await Promise.all(
 	Object.values(postFiles).map((resolver) => resolver()),
 );
 const markdown = await Promise.all(raw.map(parseMarkdown));
-const posts = slugs
+const posts: Post[] = slugs
 	.map((slug, index) => ({
+		title: markdown[index].meta.title,
+		date: markdown[index].meta.date,
+		tags:
+			markdown[index].meta.tags?.map((tag) => ({
+				label: tag,
+				color: tagColors[assignToBucket(tag, tagColors.length)],
+			})) ?? [],
 		slug,
-		meta: markdown[index].meta,
 		content: markdown[index].content,
 	}))
-	.sort((a, b) => +new Date(b.meta.date) - +new Date(a.meta.date));
+	.sort((a, b) => +new Date(b.date) - +new Date(a.date));
 
 const postsMap = new Map(posts.map((post) => [post.slug, post]));
 

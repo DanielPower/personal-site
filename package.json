@@ -12,6 +12,8 @@
 	},
 	"devDependencies": {
 		"@sveltejs/kit": "^2.5.3",
+		"@types/chroma-js": "^2.4.4",
+		"@types/node": "^20.11.25",
 		"@typescript-eslint/eslint-plugin": "^7.1.1",
 		"@typescript-eslint/parser": "^7.1.1",
 		"eslint": "^8.57.0",
@@ -32,6 +34,7 @@
 		"@fortawesome/free-brands-svg-icons": "^6.5.1",
 		"@fortawesome/free-solid-svg-icons": "^6.5.1",
 		"@sveltejs/adapter-node": "^5.0.1",
+		"chroma-js": "^2.4.2",
 		"rehype-prism-plus": "^2.0.0",
 		"rehype-stringify": "^10.0.0",
 		"remark-extract-frontmatter": "^3.2.0",

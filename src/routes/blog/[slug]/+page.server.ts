@@ -9,11 +9,5 @@ export const load: Load = async ({ params }) => {
 	if (!post) {
 		throw error(404);
 	}
-	const { title, date } = post.meta;
-	const content = post.content;
-	return {
-		title,
-		date,
-		content,
-	};
+	return post;
 };

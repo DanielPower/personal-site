@@ -29,10 +29,10 @@ const renderRss = (posts: (Post & { html: string })[], origin: string) =>
 						},
 					},
 					item: posts.map((post) => ({
-						title: post.meta.title,
+						title: post.title,
 						guid: post.slug,
 						link: `${origin}/blog/${post.slug}`,
-						pubDate: new Date(post.meta.date).toUTCString(),
+						pubDate: new Date(post.date).toUTCString(),
 						description: post.html,
 					})),
 				},

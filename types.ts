@@ -1,8 +1,16 @@
+export type PostFrontmatter = {
+	title: string;
+	date: string;
+	tags: string[];
+};
+
 export type Post = {
-	meta: {
-		title: string;
-		date: string;
-	};
+	title: string;
+	date: string;
+	tags: {
+		label: string;
+		color: string;
+	}[];
 	slug: string;
 	content: string;
 };

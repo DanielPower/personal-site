@@ -7,6 +7,7 @@ import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { unified } from "unified";
 import yaml from "yaml";
+import type { PostFrontmatter } from "../../../types";
 
 const processor = unified()
 	.use(remarkParse)
@@ -19,6 +20,6 @@ const processor = unified()
 
 export const parseMarkdown = async (markdown: string) => {
 	const rendered = await processor.process(markdown);
-	const meta = rendered.data as { date: string; title: string };
+	const meta = rendered.data as PostFrontmatter;
 	return { content: rendered.toString(), meta };
 };
