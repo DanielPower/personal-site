@@ -1,8 +1,6 @@
 import { getPosts, tags } from "$lib/server/posts";
 import type { PageServerLoad } from "./$types";
 
-export const prerender = false;
-
 export const load: PageServerLoad = async ({ url }) => {
 	const tagQuery = url.searchParams.get("tags");
 	let posts = getPosts();
