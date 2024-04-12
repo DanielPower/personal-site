@@ -45,7 +45,8 @@ export const GET: RequestHandler = async ({ url }) => {
 	const posts = await Promise.all(
 		getPosts().map(async (post) => ({
 			...post,
-			html: (await import(`$lib/posts/${post.slug}.md`)).default.render().html,
+			html: (await import(`../../lib/posts/${post.slug}.md`)).default.render()
+				.html,
 		})),
 	);
 
