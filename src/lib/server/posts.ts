@@ -1,6 +1,6 @@
-import type { Post } from "../../../types";
+import type { SvelteComponent } from "svelte";
+import type { PostFrontmatter } from "../../../types";
 import { assignToBucket } from "./bucket";
-import { parseMarkdown } from "./markdown";
 
 const tagColors = [
 	"#faedcb",
@@ -12,21 +12,20 @@ const tagColors = [
 	"#fdffb6",
 ];
 
-const postFiles = import.meta.glob<string>(`/posts/*.md`, {
-	query: "?raw",
-	import: "default",
-});
+const postFiles = import.meta.glob<{
+	default: SvelteComponent;
+	metadata: PostFrontmatter;
+}>(`$lib/posts/*.md`);
 const slugs = Object.keys(postFiles).map(
 	(path) => path.split("/").at(-1)!.split(".").at(0)!,
 );
-const raw = await Promise.all(
+const data = await Promise.all(
 	Object.values(postFiles).map((resolver) => resolver()),
 );
-const markdown = await Promise.all(raw.map(parseMarkdown));
 
 export const tags = new Map(
-	markdown
-		.map((post) => post.meta.tags)
+	data
+		.map(({ metadata }) => metadata.tags)
 		.flat()
 		.filter(Boolean)
 		.map((tag) => [
@@ -38,16 +37,15 @@ export const tags = new Map(
 		]),
 );
 
-const posts: Post[] = slugs
-	.map((slug, index) => ({
-		title: markdown[index].meta.title,
-		date: markdown[index].meta.date,
-		tags: markdown[index].meta.tags?.map((tag) => tags.get(tag)!) ?? [],
-		slug,
-		content: markdown[index].content,
+const posts = data
+	.map(({ default: component, metadata }, index) => ({
+		title: metadata.title,
+		date: metadata.date,
+		tags: metadata.tags?.map((tag) => tags.get(tag)!) ?? [],
+		slug: slugs[index],
+		content: component.render(),
 	}))
 	.sort((a, b) => +new Date(b.date) - +new Date(a.date));
-
 const postsMap = new Map(posts.map((post) => [post.slug, post]));
 
 export const getPosts = () => {

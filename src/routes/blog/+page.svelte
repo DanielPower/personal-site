@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Post } from "../../../types";
-	import Chip from "../../components/Chip.svelte";
+	import Chip from "$lib/components/Chip.svelte";
 
 	export let data;
 
