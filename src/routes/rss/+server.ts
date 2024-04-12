@@ -3,7 +3,7 @@ import { getPosts } from "$lib/server/posts";
 import { js2xml } from "xml-js";
 import type { RequestHandler } from "./$types";
 
-const renderRss = (posts: (Post & { html: string })[], origin: string) =>
+const renderRss = (posts: Post[], origin: string) =>
 	js2xml(
 		{
 			_declaration: {
@@ -33,7 +33,7 @@ const renderRss = (posts: (Post & { html: string })[], origin: string) =>
 						guid: post.slug,
 						link: `${origin}/blog/${post.slug}`,
 						pubDate: new Date(post.date).toUTCString(),
-						description: post.html,
+						description: post.content,
 					})),
 				},
 			},
@@ -42,13 +42,7 @@ const renderRss = (posts: (Post & { html: string })[], origin: string) =>
 	);
 
 export const GET: RequestHandler = async ({ url }) => {
-	const posts = await Promise.all(
-		getPosts().map(async (post) => ({
-			...post,
-			html: (await import(`../../lib/posts/${post.slug}.md`)).default.render()
-				.html,
-		})),
-	);
+	const posts = getPosts();
 
 	return new Response(renderRss(posts, url.origin), {
 		headers: {
