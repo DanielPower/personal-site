@@ -1,6 +1,5 @@
 <script>
 	import Chip from "$lib/components/Chip.svelte";
-	const posts = import.meta.glob(`$lib/posts/*.md`, { eager: true });
 	export let data;
 </script>
 
@@ -13,7 +12,7 @@
 		{/each}
 	</div>
 </div>
-{@html data.content.html}
+{@html data.content}
 
 <style>
 	h1 {

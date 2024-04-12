@@ -38,13 +38,16 @@ export const tags = new Map(
 );
 
 const posts = data
-	.map(({ default: component, metadata }, index) => ({
-		title: metadata.title,
-		date: metadata.date,
-		tags: metadata.tags?.map((tag) => tags.get(tag)!) ?? [],
-		slug: slugs[index],
-		content: component.render(),
-	}))
+	.map(({ default: component, metadata }, index) => {
+		const { html, css } = component.render();
+		return {
+			title: metadata.title,
+			date: metadata.date,
+			tags: metadata.tags?.map((tag) => tags.get(tag)!) ?? [],
+			slug: slugs[index],
+			content: `<style>${css.code}</style>${html}`,
+		};
+	})
 	.sort((a, b) => +new Date(b.date) - +new Date(a.date));
 const postsMap = new Map(posts.map((post) => [post.slug, post]));
 
