@@ -1,0 +1,105 @@
+---
+title: Setting device priority in PipeWire with WirePlumber
+date: "2024-05-04"
+tags: [linux]
+---
+
+I use my laptop both as a portable and as a desktop. When docked, there are
+multiple potential audio devices. PipeWire seems to choose from them randomly,
+but there's a specific priority I'd like them to be selected in. If plugged in,
+my headphones should always be the default. If not, then the speakers connected
+to my dock. If neither, then the laptop speakers.
+
+I found a post from 2022 by Scott Garman[^1] which helped me write a Lua script
+to set the device priority. This worked perfectly, but when I looked into the
+documentation I discovered this method is now deprecated as WirePlumber has
+moved away from Lua scripting in favour of a JSON-SPA configuration.
+
+Thanks to their migration guide[^2], it was pretty easy to switch over.
+
+## Configuration
+
+### 1. Check the priorities and names of your devices
+
+Use `wpctl status` to see a list of devices. Output devices will be listed under
+Sinks.
+
+Use `wpctl inspect <device>` to see the properties of that device.
+
+Make note of the default `priority.driver`, `priority.session` and `node.name`
+values. You'll want to set your preferred devices to something higher than the
+highest default, and you'll need the node name to match against.
+
+In my case, the highest default priority was 1009. And my devices were named:
+
+- **Internal speakers**: alsa_output.pci-0000_c1_00.6.analog-stereo
+- **Rear speakers**:
+  alsa*output.usb-CalDigit_Inc.\_CalDigit_TS4_Audio*-\_Rear-00.analog-stereo
+- **Headphones**:
+  alsa*output.usb-CalDigit_Inc.\_CalDigit_TS4_Audio*-\_Front-00.analog-stereo
+
+### 2. Create a config fragment file
+
+The file should be created in `~/.config/wireplumber/wireplumber.conf.d/`, and
+its filename must end in `.conf`. I named mine
+`~/.config/wireplumber/wireplumber.conf.d/51-set-priorities.conf`
+
+```json
+monitor.alsa.rules = [
+  {
+    matches = [
+      {
+        node.name = "alsa_output.pci-0000_c1_00.6.analog-stereo"
+      }
+    ]
+    actions = {
+      update-props = {
+        priority.driver = 1010 # Ensure this is higher than the default
+        priority.session = 1010 # I don't think priority.session is relevant, but I'm setting it anyway
+      }
+    }
+  }
+  {
+    matches = [
+      {
+        node.name = "alsa_output.usb-CalDigit_Inc._CalDigit_TS4_Audio_-_Rear-00.analog-stereo"
+      }
+    ]
+    actions = {
+      update-props = {
+        priority.driver = 1011 # Higher than the internal speakers
+        priority.session = 1011
+      }
+    }
+  }
+  {
+    matches = [
+      {
+        node.name = "alsa_output.usb-CalDigit_Inc._CalDigit_TS4_Audio_-_Front-00.analog-stereo"
+      }
+    ]
+    actions = {
+      update-props = {
+        priority.driver = 1012 # Higher than the rear speakers
+        priority.session = 1012
+      }
+    }
+  }
+]
+```
+
+### 3. Restart WirePlumber and check the changes
+
+```sh
+systemctl --user restart wireplumber
+```
+
+If you run `wpctl status` again, you should see the new priorities reflected in
+the output. If you disconnect/reconnect devices, wireplumber should
+automatically switch to the highest priority device.
+
+[^1]:
+    https://blog.zenlinux.com/2022/08/how-to-configure-audio-device-priorities-in-pipewire-wireplumber/
+
+[^2]:
+    https://pipewire.pages.freedesktop.org/wireplumber/daemon/configuration/migration.html
