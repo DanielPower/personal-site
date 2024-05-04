@@ -2,14 +2,17 @@
 	export let src: string;
 	export let alt: string;
 	const path = `/src/lib/assets/${src}`;
+	const original = import.meta.glob<{ default: string }>("$lib/assets/*", {
+		eager: true,
+	})[path]?.default!;
 	const thumbnail = import.meta.glob<{ default: string }>("$lib/assets/*", {
-		query: "?full",
+		query: "?w=960&format=webp&quality=80",
 		eager: true,
 	})[path]?.default!;
 </script>
 
 <figure>
-	<a href={path}>
+	<a href={original}>
 		<img src={thumbnail} {alt} />
 	</a>
 	{#if $$slots.default}
