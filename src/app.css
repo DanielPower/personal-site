@@ -99,6 +99,10 @@ code {
 	padding-bottom: 0.0875rem;
 }
 
+.footnotes {
+	word-break: break-word;
+}
+
 @media screen and (max-width: 650px) {
 	:root {
 		--gutter: 1rem;
