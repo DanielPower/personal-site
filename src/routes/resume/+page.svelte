@@ -12,8 +12,8 @@
 		{ icon: faGlobe, href: "https://danielpower.ca", text: "danielpower.ca" },
 		{
 			icon: faGithub,
-			href: "https://github.com/daniel-power",
-			text: "daniel-power",
+			href: "https://github.com/danielpower",
+			text: "danielpower",
 		},
 		{
 			icon: faLinkedin,
