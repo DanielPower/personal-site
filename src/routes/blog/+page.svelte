@@ -31,7 +31,8 @@
 </script>
 
 <div class="container">
-	<div>
+	<!--
+  <div>
 		<h3>Tags</h3>
 		<div class="tags">
 			{#each data.tags as tag}
@@ -43,6 +44,7 @@
 			{/each}
 		</div>
 	</div>
+  -->
 	<div>
 		{#each years.entries() as [year, { months }]}
 			{#each months.entries() as [month, { days }], monthIndex}
