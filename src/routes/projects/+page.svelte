@@ -1,13 +1,6 @@
 <script>
 	import Fa from "svelte-fa";
-	import keebProOrig from "$lib/assets/keeb-pro.png";
-	import keebProThumb from "$lib/assets/keeb-pro.png?thumbnail";
-	import eclipseOrig from "$lib/assets/eclipse.png";
-	import eclipseThumb from "$lib/assets/eclipse.png?thumbnail";
-	import orbsOrig from "$lib/assets/orbs.png";
-	import orbsThumb from "$lib/assets/orbs.png?thumbnail";
-	import motionOrig from "$lib/assets/motion.jpg";
-	import motionThumb from "$lib/assets/motion.jpg?thumbnail";
+	import Image from "$lib/components/Image.svelte";
 	import {
 		faDiscord,
 		faGithub,
@@ -43,9 +36,9 @@
 
 <div class="project">
 	<h1>Eclipse (2023)</h1>
-	<a href={eclipseOrig}
-		><img class="thumb" src={eclipseThumb} alt="Screenshot of Eclipse" /></a
-	>
+	<div class="thumb">
+		<Image src="eclipse.png" size="thumbnail" alt="Screenshot of Eclipse" />
+	</div>
 	<p>
 		A tool for visualizing GLSL shaders. It is written in Lua using the Love2D
 		framework. It is designed to be compatible with shaders from <a
@@ -61,9 +54,9 @@
 
 <div class="project">
 	<h1>Orbs in Space - Love2D Game Jam entry (2023)</h1>
-	<a href={orbsOrig}
-		><img class="thumb" src={orbsThumb} alt="Screenshot of Orbs in Space" /></a
-	>
+	<div class="thumb">
+		<Image src="orbs.png" size="thumbnail" alt="Screenshot of Orbs in Space" />
+	</div>
 	<p>
 		A game made for the <a href="https://itch.io/jam/love2d-jam-2023"
 			>Love2D Jam 2023.</a
@@ -163,9 +156,9 @@
 
 <div class="project">
 	<h1>Keeb Pro (2020)</h1>
-	<a href={keebProOrig}
-		><img class="thumb" src={keebProThumb} alt="Screenshot of Keeb Pro" /></a
-	>
+	<div class="thumb">
+		<Image src="keeb-pro.png" size="thumbnail" alt="Screenshot of Keeb Pro" />
+	</div>
 	<p>
 		A typing test built with svelte. It prompts the user to type a random
 		selection of common English words, and displays the user's typing speed in
@@ -201,9 +194,9 @@
 
 <div class="project">
 	<h1>Motion (2017)</h1>
-	<a href={motionOrig}
-		><img class="thumb" src={motionThumb} alt="Screenshot of Motion" /></a
-	>
+	<div class="thumb">
+		<Image src="motion.png" size="thumbnail" alt="Screenshot of Motion" />
+	</div>
 	<p>
 		Motion is an animation library for the Love2D game framework. It includes a
 		companion GUI tool for composing animations from spritesheets. Motion allows
