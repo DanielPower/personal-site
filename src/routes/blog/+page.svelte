@@ -6,7 +6,7 @@
 
 	const years: Map<
 		string,
-		{ months: Map<string, { days: Map<string, Post[]> }> }
+		{ months: Map<string, { days: Map<string, (typeof data.posts)[]> }> }
 	> = new Map();
 
 	$: data.posts.forEach((post) => {
@@ -62,7 +62,7 @@
 								<div class="posts">
 									{#each posts as post}
 										<a href={`blog/${post.slug}`}>
-											{post.title}
+											{post.draft ? `[Draft] ${post.title}` : post.title}
 										</a>
 									{/each}
 								</div>

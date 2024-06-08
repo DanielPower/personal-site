@@ -1,6 +1,7 @@
 import type { SvelteComponent } from "svelte";
 import type { PostFrontmatter } from "../../../types";
 import { assignToBucket } from "./bucket";
+import { dev } from "$app/environment";
 
 const tagColors = [
 	"#faedcb",
@@ -42,13 +43,15 @@ const posts = data
 		const { html, css } = component.render();
 		return {
 			title: metadata.title,
-			date: metadata.date,
+			draft: !metadata.date,
+			date: metadata.date || new Date().toISOString().slice(0, 10),
 			tags: metadata.tags?.map((tag) => tags.get(tag)!) ?? [],
 			slug: slugs[index],
 			content: `<style>${css.code}</style>${html}`,
 		};
 	})
-	.sort((a, b) => +new Date(b.date) - +new Date(a.date));
+	.sort((a, b) => +new Date(b.date) - +new Date(a.date))
+	.filter((post) => dev || !post.draft);
 const postsMap = new Map(posts.map((post) => [post.slug, post]));
 
 export const getPosts = () => {
