@@ -50,9 +50,10 @@ departure from the company, he would be replaced by the company's CEO, Jared.
 <iframe title="vimeo-player" src="https://player.vimeo.com/video/15500493?h=2f79e354b0" width="640" height="480" frameborder="0"    allowfullscreen></iframe>
 
 If at this point you're questioning what WeGame has to do with "Why I homelab",
-you're not alone. At the time it didn't occur to me either. In 2011, the social
-media platform Tagged acquired WeGame[^2]. The result is that WeGame was shut
-down, and most of its content lost forever. Including the weekly video reviews.
+you're not alone. At the time it didn't occur to me that I should be saving
+these videos. In 2011, the social media platform Tagged acquired WeGame[^2]. The
+result is that WeGame was shut down, and most of its content lost forever.
+Including the weekly video reviews.
 
 ## Insert Koin - Trying to keep a community alive
 
