@@ -47,7 +47,13 @@ days it was hosted by Gorndt and Oxhorn (Machinima creator known for creating
 [ROFLMAO!](https://www.youtube.com/watch?v=iEWgs6YQR9A)). After Oxhorn's
 departure from the company, he would be replaced by the company's CEO, Jared.
 
-<iframe title="vimeo-player" src="https://player.vimeo.com/video/15500493?h=2f79e354b0" width="640" height="480" frameborder="0"    allowfullscreen></iframe>
+<iframe 
+    title="vimeo-player" 
+    src="https://player.vimeo.com/video/15500493?h=2f79e354b0" 
+    style="width:100%;max-width:640px;aspect-ratio:4/3"
+    frameborder="0" 
+    allowfullscreen
+></iframe>
 
 If at this point you're questioning what WeGame has to do with "Why I homelab",
 you're not alone. At the time it didn't occur to me that I should be saving
