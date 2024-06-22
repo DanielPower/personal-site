@@ -1,5 +1,5 @@
 ---
-title: "Into the Kubernet Part 1: Why I homelab"
+title: "Homelab Saga Part 1: Why I homelab"
 date: "2024-06-22"
 tags: ["kubernetes", "homelab", "nostalgia"]
 ---
