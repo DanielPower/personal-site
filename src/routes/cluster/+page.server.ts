@@ -1,0 +1,8 @@
+import { hostname } from "os";
+import type { PageServerLoad } from "./$types";
+
+export const load: PageServerLoad = async () => {
+	return {
+		hostname: hostname(),
+	};
+};
