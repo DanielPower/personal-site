@@ -9,15 +9,15 @@
 	const images: { [key in Size]: string } = {
 		original: import.meta.glob<{ default: string }>("$lib/assets/**", {
 			eager: true,
-		})[path]?.default!,
+		})[path]?.default,
 		thumbnail: import.meta.glob<{ default: string }>("$lib/assets/**", {
 			query: "?w=320&format=webp&quality=80",
 			eager: true,
-		})[path]?.default!,
+		})[path]?.default,
 		fullwidth: import.meta.glob<{ default: string }>("$lib/assets/**", {
 			query: "?w=960&format=webp&quality=80",
 			eager: true,
-		})[path]?.default!,
+		})[path]?.default,
 	};
 </script>
 

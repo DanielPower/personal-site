@@ -3,6 +3,7 @@
 	const menuItems = [
 		{ title: "About", url: "/" },
 		{ title: "Blog", url: "/blog" },
+		{ title: "Gallery", url: "/gallery" },
 		{ title: "Projects", url: "/projects" },
 		{ title: "Resume", url: "/resume" },
 	];
@@ -11,7 +12,7 @@
 <nav>
 	{#each menuItems as menuItem}
 		<a
-			class:active={menuItem.url === $page.route.id}
+			class:active={menuItem.url === `/${$page.route.id?.split("/")[1]}`}
 			href={menuItem.url}
 			data-text={menuItem.title}>{menuItem.title}</a
 		>
