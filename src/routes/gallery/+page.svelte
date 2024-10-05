@@ -1,28 +1,26 @@
 <script lang="ts">
-	const collections = import.meta.glob<{
-		default: { title: string; date: string };
-	}>("$lib/gallery/*/collection.json", {
-		eager: true,
-	});
+	import type { PageServerData } from "./$types";
+	export let data: PageServerData;
+	let { photos } = data;
 </script>
 
-{#each Object.values(collections) as collection}
-	<a href={`/gallery/${collection}`}
-		><div class="collection">
-			<div class="row">
-				<h2>{collection.default.title}</h2>
-				<p>{collection.default.date}</p>
-			</div>
-		</div>
-	</a>
-{/each}
+<div class="gallery">
+	{#each photos as photo}
+		<a href={`/gallery/${photo.split("/").at(-1)}`}>
+			<img src={photo} alt={photo} />
+		</a>
+	{/each}
+</div>
 
 <style>
-	.collection {
-		background-color: #a1b8e3;
-	}
-	.row {
+	.gallery {
+		width: 100%;
 		display: flex;
-		justify-content: space-between;
+		flex-wrap: wrap;
+		justify-content: space-evenly;
+	}
+
+	.gallery img {
+		width: 300px;
 	}
 </style>
