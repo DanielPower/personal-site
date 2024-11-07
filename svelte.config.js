@@ -5,17 +5,20 @@ import remarkFootnotes from "remark-footnotes";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	preprocess: [
-		vitePreprocess(),
-		mdsvex({
-			extensions: [".md"],
-			remarkPlugins: [remarkFootnotes],
-		}),
-	],
-	extensions: [".svelte", ".md"],
-	kit: {
-		adapter: adapter(),
-	},
+  preprocess: [
+    vitePreprocess(),
+    mdsvex({
+      extensions: [".md"],
+      remarkPlugins: [remarkFootnotes],
+    }),
+  ],
+  extensions: [".svelte", ".md"],
+  kit: {
+    adapter: adapter(),
+  },
+  compilerOptions: {
+    css: "injected",
+  },
 };
 
 export default config;

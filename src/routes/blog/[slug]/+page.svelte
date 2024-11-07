@@ -12,7 +12,7 @@
 		{/each}
 	</div>
 </div>
-{@html data.content}
+{@html data.body}
 
 <style>
 	h1 {
