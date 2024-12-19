@@ -29,13 +29,3 @@
 		<figcaption><slot /></figcaption>
 	{/if}
 </figure>
-
-<style>
-	figure {
-		max-width: 40rem;
-	}
-	img {
-		display: block;
-		max-width: 100%;
-	}
-</style>
