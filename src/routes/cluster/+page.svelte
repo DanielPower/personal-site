@@ -6,7 +6,7 @@
 <ul>
 	<li>
 		<a
-			href="https://grafana.danielpower.ca/d/bdw8kjl3hrxmob/public-dashboard?orgId=1&refresh=30s&from=1734488039077&to=1734491639077"
+			href="https://grafana.danielpower.ca/public-dashboards/e65981fffdbf4a129b23fd0e8e51b879?orgId=1&refresh=30s"
 			>Grafana Dashboard</a
 		>
 	</li>
