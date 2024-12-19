@@ -13,50 +13,90 @@
 	} from "@fortawesome/free-solid-svg-icons";
 </script>
 
-<p>
-	Senior Software Developer @ <a href="https://www.colabsoftware.com"
-		>CoLab Software</a
-	>
-</p>
+<div class="container">
+	<div class="sidebar">
+		<div class="group">
+			Social
+			<a href="mailto:me+homepage@danielpower.ca"
+				>Email <Fa fw icon={faEnvelope} /></a
+			>
+			<a href="https://www.instagram.com/ifcoffeethendan/"
+				>Instagram <Fa fw icon={faInstagram} /></a
+			>
+			<a href="https://www.mastodon.online/@CrispyUmbrella"
+				>Mastodon <Fa fw icon={faMastodon} /></a
+			>
+		</div>
 
-<p>Located in St. John's, Newfoundland</p>
+		<div class="group">
+			Coding
+			<a href="https://www.github.com/danielpower"
+				>GitHub <Fa fw icon={faGithub} /></a
+			>
+			<a href="https://open.kattis.com/users/crispyumbrella"
+				>Kattis <Fa fw icon={faPaw} /></a
+			>
+		</div>
 
-<div class="group">
-	Social
-	<a href="mailto:me+homepage@danielpower.ca"
-		><Fa fw icon={faEnvelope} /> Email</a
-	>
-	<a href="https://www.instagram.com/ifcoffeethendan/"
-		><Fa fw icon={faInstagram} /> Instagram</a
-	>
-	<a href="https://www.mastodon.online/@CrispyUmbrella"
-		><Fa fw icon={faMastodon} /> Mastodon</a
-	>
-</div>
+		<div class="group">
+			Gaming
+			<a href="https://www.steamcommunity.com/id/DanielPower/"
+				>Steam <Fa fw icon={faSteam} /></a
+			>
+			<a href="https://osu.ppy.sh/users/10624401"
+				>osu! <Fa fw icon={faCircle} class="fa-light" /></a
+			>
+		</div>
+	</div>
 
-<div class="group">
-	Coding
-	<a href="https://www.github.com/danielpower"
-		><Fa fw icon={faGithub} /> GitHub</a
-	>
-	<a href="https://open.kattis.com/users/crispyumbrella"
-		><Fa fw icon={faPaw} /> Kattis</a
-	>
-</div>
+	<div class="content">
+		<p>
+			Senior Software Developer @ <a href="https://www.colabsoftware.com"
+				>CoLab Software</a
+			><br />
+			Located in St. John's, Newfoundland, Canada 🇨🇦
+		</p>
 
-<div class="group">
-	Gaming
-	<a href="https://www.steamcommunity.com/id/DanielPower/"
-		><Fa fw icon={faSteam} /> Steam</a
-	>
-	<a href="https://osu.ppy.sh/users/10624401"
-		><Fa fw icon={faCircle} class="fa-light" /> osu!</a
-	>
+		<p>
+			It's December, so I'm working on Advent of Code 2024 and catching up on my
+			game backlog. Enjoy the snowy vibes! 🎄
+		</p>
+	</div>
 </div>
 
 <style>
+	.container {
+		display: flex;
+		flex-direction: column-reverse;
+		gap: 1rem;
+	}
+
+	.sidebar {
+		background-color: var(--color-dark);
+		height: fit-content;
+		padding: 0.5rem;
+		border-radius: 0.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
 	.group {
 		display: flex;
 		flex-direction: column;
+	}
+
+	@media (min-width: 650px) {
+		.container {
+			flex-direction: row;
+		}
+
+		.group {
+			align-items: flex-end;
+		}
+
+		.content {
+			flex: 1;
+		}
 	}
 </style>

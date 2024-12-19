@@ -1,10 +1,12 @@
 <script lang="ts">
-	import "prism-themes/themes/prism-nord.min.css";
+	import "prism-themes/themes/prism-xonokai.min.css";
 	import "../app.css";
 	import Navbar from "$lib/components/Navbar.svelte";
 	import Footer from "$lib/components/Footer.svelte";
+	import Snow from "$lib/components/Snow.svelte";
 </script>
 
+<Snow />
 <div class="container">
 	<div class="topbar">
 		<span class="name">Daniel Power</span>
@@ -29,8 +31,6 @@
 	}
 
 	.content {
-		display: flex;
-		flex-direction: column;
 		gap: 1rem;
 		flex-grow: 1;
 	}
@@ -42,6 +42,7 @@
 	.topbar {
 		display: flex;
 		align-items: end;
+		line-height: 1;
 		gap: 1rem;
 	}
 

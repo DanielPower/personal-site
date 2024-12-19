@@ -1,7 +1,4 @@
 <script lang="ts">
-	import type { Post } from "../../../types";
-	import Chip from "$lib/components/Chip.svelte";
-
 	export let data;
 
 	const years: Map<
@@ -31,20 +28,6 @@
 </script>
 
 <div class="container">
-	<!--
-  <div>
-		<h3>Tags</h3>
-		<div class="tags">
-			{#each data.tags as tag}
-				<div class="tag">
-					<a data-sveltekit-reload href={`?tags=${tag.label}`}>
-						<Chip label={tag.label} color={tag.color} />
-					</a>
-				</div>
-			{/each}
-		</div>
-	</div>
-  -->
 	<div>
 		{#each years.entries() as [year, { months }]}
 			{#each months.entries() as [month, { days }], monthIndex}
@@ -79,15 +62,6 @@
 	.container {
 		display: flex;
 		gap: 2rem;
-	}
-	.tags {
-		width: 12rem;
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-	}
-	.tag:hover {
-		filter: saturate(2) brightness(1.25);
 	}
 	.month {
 		margin-bottom: 1rem;

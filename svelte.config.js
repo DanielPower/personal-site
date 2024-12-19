@@ -12,12 +12,12 @@ const config = {
       remarkPlugins: [remarkFootnotes],
     }),
   ],
+  compilerOptions: {
+    warningFilter: (warning) => !warning.code === "a11y_media_has_captions",
+  },
   extensions: [".svelte", ".md"],
   kit: {
     adapter: adapter(),
-  },
-  compilerOptions: {
-    css: "injected",
   },
 };
 

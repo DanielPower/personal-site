@@ -1,15 +1,15 @@
 import { sveltekit } from "@sveltejs/kit/vite";
-import { imagetools } from "vite-imagetools";
+import { enhancedImages } from "@sveltejs/enhanced-img";
 import { defineConfig } from "vite";
 
 export default defineConfig({
-	plugins: [
-		sveltekit(),
-		imagetools(),
-	],
-	server: {
-		fs: {
-			allow: ["posts"],
-		},
-	},
+  plugins: [
+    sveltekit(),
+    enhancedImages(),
+  ],
+  server: {
+    fs: {
+      allow: ["posts"],
+    },
+  },
 });

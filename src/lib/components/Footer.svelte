@@ -1,10 +1,11 @@
-<script lang="ts">
-	const year = new Date().getFullYear();
-</script>
-
-<footer>Copyright © {year}, Daniel Power</footer>
+<footer>
+	Hosted on my <a class="cluster" href="/cluster">Home Kubernetes Cluster</a>
+</footer>
 
 <style>
+	.cluster {
+		white-space: nowrap;
+	}
 	footer {
 		text-align: center;
 	}

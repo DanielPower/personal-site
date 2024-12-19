@@ -1,26 +1,20 @@
 <script>
-	import Chip from "$lib/components/Chip.svelte";
 	export let data;
 </script>
 
-<h1>{data.title}</h1>
-<div>
-	<p>Published on: {data.date}</p>
-	<div class="tags">
-		{#each data.tags as { label, color }}
-			<Chip {label} {color} />
-		{/each}
+<div class="post-heading">
+	<h1>{data.title}</h1>
+	<div>
+		<p>Published on: {data.date}</p>
 	</div>
 </div>
 {@html data.body}
 
 <style>
-	h1 {
-		margin-bottom: 0;
-	}
-	.tags {
+	.post-heading {
 		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
+		flex-direction: column;
+		align-items: center;
+		margin: 0 auto;
 	}
 </style>
