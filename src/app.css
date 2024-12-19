@@ -45,17 +45,9 @@ h1 {
 	font-weight: 600;
 }
 
-h1:not(:first-child) {
-	margin-top: 1.25rem;
-}
-
 h2 {
 	font-size: 1.2rem;
 	font-weight: 600;
-}
-
-h2:not(:first-child) {
-	margin-top: 1rem;
 }
 
 h3 {
@@ -75,23 +67,6 @@ ul {
 
 p:not(:first-child) {
 	margin-top: 0.75rem;
-}
-
-figure {
-	max-width: 40rem;
-	margin-top: 1rem;
-}
-
-img {
-	display: block;
-	max-width: 100%;
-}
-
-figcaption {
-	font-size: 0.8em;
-	background-color: var(--color-dark);
-	padding: 0.25rem;
-	color: var(--color-fg);
 }
 
 pre[class*="language-"] {

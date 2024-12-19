@@ -29,3 +29,21 @@
 		<figcaption><slot /></figcaption>
 	{/if}
 </figure>
+
+<style>
+	img {
+		display: block;
+		max-width: 100%;
+	}
+
+	figure {
+		max-width: 40rem;
+	}
+
+	figcaption {
+		font-size: 0.8em;
+		background-color: var(--color-dark);
+		padding: 0.25rem;
+		color: var(--color-fg);
+	}
+</style>

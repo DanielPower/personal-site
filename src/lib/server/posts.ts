@@ -16,13 +16,14 @@ const data = await Promise.all(
 
 const posts = data
   .map(({ default: component, metadata }, index) => {
-    const { body } = render(component);
+    const { body, head } = render(component);
     return {
       title: metadata.title,
       draft: !metadata.date,
       date: metadata.date || new Date().toISOString().slice(0, 10),
       slug: slugs[index],
       body,
+      head,
     };
   })
   .sort((a, b) => +new Date(b.date) - +new Date(a.date))
