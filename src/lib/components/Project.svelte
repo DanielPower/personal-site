@@ -10,7 +10,7 @@
 <div class="project">
 	{#if image}
 		<div class="thumb">
-			<Image src={image} alt="Screenshot of {title}" />
+			<Image src={image} size="thumbnail" alt="Screenshot of {title}" />
 		</div>
 	{/if}
 	<h1>{title}</h1>

@@ -4,26 +4,26 @@
 	export let alt: string;
 	export let size: Size = "fullwidth";
 
-	const path = `/src/lib/assets/${src}`;
-
-	const images: { [key in Size]: string } = {
-		original: import.meta.glob<{ default: string }>("$lib/assets/**", {
-			eager: true,
-		})[path]?.default!,
-		thumbnail: import.meta.glob<{ default: string }>("$lib/assets/**", {
-			query: "?w=320&format=webp&quality=80",
-			eager: true,
-		})[path]?.default!,
-		fullwidth: import.meta.glob<{ default: string }>("$lib/assets/**", {
-			query: "?w=960&format=webp&quality=80",
-			eager: true,
-		})[path]?.default!,
-	};
+	let resizeSlug = "";
+	switch (size) {
+		case "original":
+			resizeSlug = "";
+			break;
+		case "fullwidth":
+			resizeSlug = "960x0/";
+			break;
+		case "thumbnail":
+			resizeSlug = "320x0/";
+			break;
+	}
 </script>
 
 <figure>
-	<a href={images.original}>
-		<img src={images[size]} {alt} />
+	<a href={`https://thumbor.danielpower.ca/unsafe/${src}`}>
+		<img
+			src={`https://thumbor.danielpower.ca/unsafe/${resizeSlug}filters:format(webp)/${src}`}
+			{alt}
+		/>
 	</a>
 	{#if $$slots.default}
 		<figcaption><slot /></figcaption>
