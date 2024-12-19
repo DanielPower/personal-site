@@ -14,6 +14,7 @@ const config = {
   ],
   compilerOptions: {
     warningFilter: (warning) => !warning.code === "a11y_media_has_captions",
+    css: "injected",
   },
   extensions: [".svelte", ".md"],
   kit: {

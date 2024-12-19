@@ -2,7 +2,7 @@
 	--color-bg: #2d2a2e;
 	--color-fg: #fcfcfa;
 	--color-url: #ffd866;
-  --color-dark: #211c1c;
+	--color-dark: #211c1c;
 	--gutter: 2rem;
 	--content-width: calc(min(960px, 100% - var(--gutter) * 2));
 }
@@ -46,15 +46,16 @@ h1 {
 }
 
 h1:not(:first-child) {
-  margin-top: 1.25rem;
+	margin-top: 1.25rem;
 }
 
 h2 {
 	font-size: 1.2rem;
 	font-weight: 600;
-  :not(:first-child) {
-    margin-top: 1rem;
-  }
+}
+
+h2:not(:first-child) {
+	margin-top: 1rem;
 }
 
 h3 {
@@ -67,39 +68,36 @@ h4 {
 	font-style: italic;
 }
 
-img {
-	max-width: max-content;
-}
-
 ol,
 ul {
 	padding-left: 1rem;
 }
 
 p:not(:first-child) {
-  margin-top: 0.75rem;
+	margin-top: 0.75rem;
+}
+
+figure {
+	max-width: 40rem;
+	margin-top: 1rem;
+}
+
+img {
+	display: block;
+	max-width: 100%;
 }
 
 figcaption {
 	font-size: 0.8em;
 	background-color: var(--color-dark);
 	padding: 0.25rem;
-	color: #f2f2f2;
-}
-
-figcaption a {
-	color: #b2b2ff;
-}
-
-figcaption a:hover {
-	color: #e5e5ff;
-	font-size: 0.75rem;
+	color: var(--color-fg);
 }
 
 pre[class*="language-"] {
 	font-size: 0.75rem;
-  background-color: var(--color-dark);
-  border: none;
+	background-color: var(--color-dark);
+	border: none;
 }
 
 code {
