@@ -2,6 +2,8 @@
 import Image from "../components/Image.astro";
 import Layout from "../layouts/Layout.astro";
 export const prerender = false;
+
+const node_name = process.env.PUBLIC_NODE_NAME || "Unknown node";
 ---
 
 <Layout>
@@ -16,19 +18,14 @@ export const prerender = false;
   </ul>
 
   <p>
-    This page is being served by <span class="node"
-      >{import.meta.env.PUBLIC_NODE_NAME}</span
-    >
+    This page is being served by <span class="node">{node_name}</span>
     in my homelab Kubernetes cluster.
   </p>
 
   <p>If you refresh, you might get a different node! 🔄</p>
 
   <div class="node-image">
-    <Image
-      src={`nodes/${process.env.PUBLIC_NODE_NAME}.png`}
-      alt={process.env.PUBLIC_NODE_NAME || "Unknown node"}
-    />
+    <Image src={`nodes/${process.env.PUBLIC_NODE_NAME}.png`} alt={node_name} />
   </div>
 </Layout>
 
