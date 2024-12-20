@@ -1,0 +1,60 @@
+---
+import Image from "./Image.astro";
+import Icon from "./Icon.astro";
+const { title, links, image } = Astro.props;
+---
+
+<div class="project">
+  {
+    image ? (
+      <div class="thumb">
+        <Image src={image} size="thumbnail" alt="Screenshot of {title}" />
+      </div>
+    ) : null
+  }
+  <h1>{title}</h1>
+  <slot />
+  <div class="links">
+    {
+      links.map(({ name, url, icon }) => (
+        <a href={url}>
+          <Icon name={icon} />
+          {name}
+        </a>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .project {
+    padding: 0.5rem;
+    background-color: var(--color-dark);
+    border-radius: 0.5rem;
+  }
+
+  h1 {
+    margin-top: 0;
+    width: fit-content;
+  }
+
+  .links {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .thumb {
+    float: right;
+    width: 300px;
+    padding-left: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    .thumb {
+      float: none;
+      width: auto;
+      padding-left: 0;
+    }
+  }
+</style>

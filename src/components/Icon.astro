@@ -1,0 +1,14 @@
+---
+import { Icon as AstroIcon } from "astro-icon/components";
+
+const { name } = Astro.props;
+---
+
+<AstroIcon name={name} size="1.25rem" />
+
+<style>
+  svg {
+    transform-origin: center;
+    vertical-align: -0.25em;
+  }
+</style>

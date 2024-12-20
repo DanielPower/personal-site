@@ -1,0 +1,64 @@
+---
+import Footer from "../components/Footer.astro";
+import Navbar from "../components/Navbar.astro";
+import BaseHead from "../components/BaseHead.astro";
+import Snow from "../components/Snow.astro";
+const { title } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <BaseHead title={title} />
+  </head>
+  <body>
+    <Snow />
+    <div class="container">
+      <div class="topbar">
+        <span class="name">Daniel Power</span>
+        <Navbar />
+      </div>
+      <div class="content">
+        <slot />
+      </div>
+      <Footer />
+    </div>
+  </body>
+</html>
+
+<style>
+  .container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    padding: var(--gutter) 0 var(--gutter) 0;
+    margin: 0 auto 0 auto;
+    gap: 1rem;
+    max-width: var(--content-width);
+    transition: ease all 0.25s;
+  }
+
+  .content {
+    gap: 1rem;
+    flex-grow: 1;
+  }
+
+  .name {
+    font-size: 1.5rem;
+  }
+
+  .topbar {
+    display: flex;
+    align-items: end;
+    line-height: 1;
+    gap: 1rem;
+  }
+
+  @media (max-width: 650px) {
+    .topbar {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

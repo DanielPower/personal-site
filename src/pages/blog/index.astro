@@ -1,0 +1,91 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog"))
+  .filter((post) => !!post.data.date)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const years: Map<
+  string,
+  { months: Map<string, { days: Map<string, (typeof posts)[]> }> }
+> = new Map();
+console.log(posts);
+
+posts.forEach((post) => {
+  const yyyy = post.data.date.getUTCFullYear();
+  const mm = String(post.data.date.getUTCMonth() + 1).padStart(2, "0");
+  const dd = String(post.data.date.getUTCDate()).padStart(2, "0");
+  const month = new Date(0, parseInt(mm, 10) - 1).toLocaleString("default", {
+    month: "long",
+  });
+  if (!years.has(yyyy)) {
+    years.set(yyyy, { months: new Map() });
+  }
+  const months = years.get(yyyy)?.months!;
+  if (!months.has(month)) {
+    months.set(month, { days: new Map() });
+  }
+  const days = months.get(month)?.days!;
+  if (!days.has(dd)) {
+    days.set(dd, []);
+  }
+  const day = days.get(dd)!;
+  day.push(post);
+});
+---
+
+<Layout>
+  <div class="container">
+    <div>
+      {
+        years.entries().map(([year, { months }]) =>
+          months.entries().map(([month, { days }], monthIndex) => (
+            <div class="month">
+              <h3>
+                {month}
+                {monthIndex === 0 ? year : ""}
+              </h3>
+              {days.entries().map(([day, posts]) => (
+                <div class="day">
+                  <div class="day-number">{day}</div>
+                  <div class="posts">
+                    {posts.map((post) => (
+                      <a href={`blog/${post.id}`}>
+                        {post.draft
+                          ? `[Draft] ${post.data.title}`
+                          : post.data.title}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )),
+        )
+      }
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    display: flex;
+    gap: 2rem;
+  }
+  .month {
+    margin-bottom: 1rem;
+  }
+  .day {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .day-number {
+    width: 1.5rem;
+    text-align: right;
+  }
+  .posts {
+    display: flex;
+    flex-direction: column;
+  }
+</style>

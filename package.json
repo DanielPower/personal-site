@@ -1,45 +1,23 @@
 {
-	"name": "personal-site",
-	"type": "module",
-	"scripts": {
-		"dev": "vite dev",
-		"build": "vite build",
-		"preview": "vite preview",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "prettier --check . && eslint .",
-		"format": "prettier --write ."
-	},
-	"devDependencies": {
-		"@sveltejs/enhanced-img": "^0.4.4",
-		"@sveltejs/kit": "^2.12.1",
-		"@tsparticles/basic": "^3.7.1",
-		"@tsparticles/updater-wobble": "^3.7.1",
-		"@types/chroma-js": "^2.4.5",
-		"@types/node": "^22.10.2",
-		"@typescript-eslint/eslint-plugin": "^8.18.1",
-		"@typescript-eslint/parser": "^8.18.1",
-		"eslint": "^9.17.0",
-		"eslint-config-prettier": "^9.1.0",
-		"eslint-plugin-svelte": "^2.46.1",
-		"mdsvex": "^0.12.3",
-		"prettier": "^3.4.2",
-		"prettier-plugin-svelte": "^3.3.2",
-		"prism-themes": "^1.9.0",
-		"svelte": "^5.14.4",
-		"svelte-check": "^4.1.1",
-		"svelte-fa": "^4.0.3",
-		"typescript": "^5.7.2",
-		"vite": "^6.0.3",
-		"xml-js": "^1.6.11"
-	},
-	"dependencies": {
-		"@fortawesome/free-brands-svg-icons": "^6.7.2",
-		"@fortawesome/free-solid-svg-icons": "^6.7.2",
-		"@sveltejs/adapter-node": "^5.2.10",
-		"@sveltejs/vite-plugin-svelte": "^5.0.3",
-		"@tsparticles/engine": "^3.7.1",
-		"chroma-js": "^3.1.2",
-		"remark-footnotes": "^2.0.0"
-	}
+  "name": "personal-site-astro",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.0.2",
+    "@astrojs/rss": "^4.0.10",
+    "@astrojs/sitemap": "^3.2.1",
+    "@iconify-json/mdi": "^1.2.2",
+    "astro": "^5.1.0",
+    "astro-icon": "^1.1.4"
+  },
+  "devDependencies": {
+    "prettier": "^3.4.2",
+    "prettier-plugin-astro": "^0.14.1"
+  }
 }

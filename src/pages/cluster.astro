@@ -1,0 +1,42 @@
+---
+import Image from "../components/Image.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+  <ul>
+    <li>
+      <a
+        href="https://grafana.danielpower.ca/public-dashboards/e65981fffdbf4a129b23fd0e8e51b879?orgId=1&refresh=30s"
+        >Grafana Dashboard</a
+      >
+    </li>
+    <li><a href="https://status.danielpower.ca">Uptime Monitoring</a></li>
+  </ul>
+
+  <p>
+    This page is being served by <span class="node"
+      >{import.meta.env.PUBLIC_NODE_NAME}</span
+    >
+    in my homelab Kubernetes cluster.
+  </p>
+
+  <p>If you refresh, you might get a different node! 🔄</p>
+
+  <div class="node-image">
+    <Image
+      src={`nodes/${import.meta.env.PUBLIC_NODE_NAME}.png`}
+      alt={import.meta.env.PUBLIC_NODE_NAME || "Unknown node"}
+    />
+  </div>
+</Layout>
+
+<style>
+  .node-image {
+    margin-top: 0.5rem;
+  }
+
+  .node {
+    font-weight: bold;
+  }
+</style>

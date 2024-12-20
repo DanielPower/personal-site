@@ -1,0 +1,106 @@
+:root {
+  --color-bg: #2d2a2e;
+  --color-fg: #fcfcfa;
+  --color-url: #ffd866;
+  --color-dark: #211c1c;
+  --gutter: 2rem;
+  --content-width: calc(min(960px, 100% - var(--gutter) * 2));
+}
+
+@font-face {
+  font-family: Gorton;
+  src: url("/GortonPerfectedVF.woff2");
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  font-family: Gorton, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-fg);
+}
+
+a {
+  color: var(--color-url);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+h4 {
+  font-size: 1.1rem;
+  font-style: italic;
+}
+
+ol,
+ul {
+  padding-left: 1rem;
+}
+
+p:not(:first-child) {
+  margin-top: 0.75rem;
+}
+
+pre[class*="language-"] {
+  font-size: 0.75rem;
+  background-color: var(--color-dark);
+  border: none;
+}
+
+code {
+  background-color: var(--color-dark);
+  border-radius: 0.3rem;
+  color: #f8f8f2;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  padding-top: 0.0875rem;
+  padding-bottom: 0.0875rem;
+}
+
+.footnotes {
+  word-break: break-word;
+}
+
+@media screen and (max-width: 650px) {
+  :root {
+    --gutter: 1rem;
+  }
+  p {
+    text-align: left;
+  }
+}
+
+@media print {
+  a {
+    color: black;
+    text-decoration: underline;
+  }
+}
