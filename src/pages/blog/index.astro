@@ -10,7 +10,6 @@ const years: Map<
   string,
   { months: Map<string, { days: Map<string, (typeof posts)[]> }> }
 > = new Map();
-console.log(posts);
 
 posts.forEach((post) => {
   const yyyy = post.data.date.getUTCFullYear();
