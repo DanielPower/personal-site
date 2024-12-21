@@ -1,21 +1,58 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
-import BlogPost from '../../layouts/BlogPost.astro';
-import { render } from 'astro:content';
+import { type CollectionEntry, getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { render } from "astro:content";
+import { format } from "date-fns";
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-	return posts.map((post) => ({
-		params: { slug: post.id },
-		props: post,
-	}));
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: post,
+  }));
 }
-type Props = CollectionEntry<'blog'>;
+type Props = CollectionEntry<"blog">;
 
 const post = Astro.props;
 const { Content } = await render(post);
 ---
 
-<BlogPost {...post.data}>
-	<Content />
-</BlogPost>
+<Layout>
+  <article>
+    <div class="post-heading">
+      <h1>{post.data.title}</h1>
+      <div>
+        {
+          post.data.date ? (
+            <p>Published on {format(post.data.date, "yyyy-mm-dd")}</p>
+          ) : null
+        }
+      </div>
+    </div>
+    <div class="post-body">
+      <Content />
+    </div>
+  </article>
+
+  <style>
+    .post-heading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 auto;
+    }
+
+    .post-body {
+      margin-top: 1rem;
+    }
+    .post-body :global(h2) {
+      margin-top: 1.5rem;
+    }
+    .post-body :global(h3) {
+      margin-top: 1rem;
+    }
+    .post-body :global(figure) {
+      margin-top: 1rem;
+    }
+  </style>
+</Layout>
