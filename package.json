@@ -13,10 +13,13 @@
     "@astrojs/node": "^9.0.0",
     "@astrojs/rss": "^4.0.10",
     "@astrojs/sitemap": "^3.2.1",
+    "@astrojs/svelte": "^7.0.2",
     "@iconify-json/mdi": "^1.2.2",
     "astro": "^5.1.0",
     "astro-icon": "^1.1.4",
-    "date-fns": "^4.1.0"
+    "date-fns": "^4.1.0",
+    "svelte": "^5.16.0",
+    "typescript": "^5.7.2"
   },
   "devDependencies": {
     "prettier": "^3.4.2",
