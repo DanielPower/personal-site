@@ -1,4 +1,5 @@
 ---
+import Image from "../components/Image.astro";
 import Layout from "../layouts/Layout.astro";
 import Icon from "../components/Icon.astro";
 ---
@@ -38,6 +39,20 @@ import Icon from "../components/Icon.astro";
           </a>
         </a>
       </div>
+
+      <div class="group">
+        Circle
+        <a href="https://ecrann.dev">Ethan Crann <Icon name="mdi:link" /></a>
+        <a href="https://jackharrhy.dev">Jack Harrhy <Icon name="mdi:link" /></a
+        >
+        <a href="https://mitchellhynes.com"
+          >Mitchell Hynes <Icon name="mdi:link" /></a
+        >
+        <a href="https://moustafaelsisy.com"
+          >Moustafa Elsisy <Icon name="mdi:link" /></a
+        >
+        <a href="https://rileyflynn.me">Riley Flynn <Icon name="mdi:link" /></a>
+      </div>
     </div>
 
     <div class="content">
@@ -49,9 +64,15 @@ import Icon from "../components/Icon.astro";
       </p>
 
       <p>
-        It's December, so I'm working on Advent of Code 2024 and catching up on
-        my game backlog. Enjoy the snowy vibes! 🎄
+        I'm probably busy tracking down ghosts in my baremetal <a
+          href="/cluster">Kubernetes cluster</a
+        >, or clicking circles in <a href="https://osu.ppy.sh/users/10624401"
+          >osu!</a
+        >.
       </p>
+      <p>Please enjoy this photo of Maria. She is very grumpy.</p>
+      <br />
+      <Image src="/grumpy_maria.png" alt="Maria" />
     </div>
   </div>
 </Layout>
@@ -64,16 +85,16 @@ import Icon from "../components/Icon.astro";
   }
 
   .sidebar {
-    background-color: var(--color-dark);
     height: fit-content;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
   }
 
   .group {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--color-dark);
     display: flex;
     flex-direction: column;
   }
