@@ -2,6 +2,49 @@
 import Image from "../components/Image.astro";
 import Layout from "../layouts/Layout.astro";
 import Icon from "../components/Icon.astro";
+
+const circle = [
+  {
+    name: "Ethan Crann",
+    url: "https://ecrann.dev",
+  },
+  {
+    name: "Jack Harrhy",
+    url: "https://jackharrhy.dev",
+  },
+  {
+    name: "Mitchell Hynes",
+    url: "https://mitchellhynes.com",
+  },
+  {
+    name: "Moustafa Elsisy",
+    url: "https://moustafaelsisy.com",
+  },
+  {
+    name: "Riley Flynn",
+    url: "https://rileyflynn.me",
+  },
+  {
+    name: "Danielle Donnelly",
+    url: "https://danielledonnelly.github.io/marketing-portfolio/",
+  },
+  {
+    name: "Josh Murphy",
+    url: "https://joshmurphy.ca",
+  },
+  {
+    name: "Ethan Denny",
+    url: "https://ehtandenny.dev",
+  },
+  {
+    name: "Keenan Nicholson",
+    url: "https://keenannicholson.me",
+  },
+  {
+    name: "Evan Whelan",
+    url: "https://evaan.dev",
+  },
+].sort(() => Math.random() - 0.5);
 ---
 
 <Layout title="Daniel Power">
@@ -42,16 +85,14 @@ import Icon from "../components/Icon.astro";
 
       <div class="group">
         Circle
-        <a href="https://ecrann.dev">Ethan Crann <Icon name="mdi:link" /></a>
-        <a href="https://jackharrhy.dev">Jack Harrhy <Icon name="mdi:link" /></a
-        >
-        <a href="https://mitchellhynes.com"
-          >Mitchell Hynes <Icon name="mdi:link" /></a
-        >
-        <a href="https://moustafaelsisy.com"
-          >Moustafa Elsisy <Icon name="mdi:link" /></a
-        >
-        <a href="https://rileyflynn.me">Riley Flynn <Icon name="mdi:link" /></a>
+        {
+          circle.map(({ name, url }) => (
+            <a href={url}>
+              {name}
+              <Icon name="mdi:link" />
+            </a>
+          ))
+        }
       </div>
     </div>
 
