@@ -8,6 +8,7 @@ import shikiTheme from "./shiki.json";
 export default defineConfig({
   site: "https://danielpower.ca",
   integrations: [mdx(), sitemap(), icon()],
+  trailingSlash: "never",
   markdown: {
     shikiConfig: {
       theme: shikiTheme,
