@@ -7,11 +7,41 @@ import Layout from "../layouts/Layout.astro";
 <Layout>
   <div class="projects">
     <Project
-      title="TwatBot (2023)"
+      title="Balacord (2024-2025)"
+      image="balacord.png"
       links={[
         {
           name: "Repository",
-          url: "https://github.com/danielpower/twatbot",
+          url: "https://github.com/DanielPower/balacord",
+          icon: "mdi:github",
+        },
+        {
+          name: "Invite to your server",
+          url: "https://discord.com/oauth2/authorize?client_id=1224531149372657767&permissions=2147484672&scope=bot",
+          icon: "mdi:discord",
+        },
+        {
+          name: "Discord Community",
+          url: "https://discord.gg/SxcZkqF6",
+          icon: "mdi:discord",
+        },
+      ]}
+    >
+      <p>
+        A Discord bot for displaying information about Balatro Jokers.
+      </p>
+      <p>
+        Balacord supports all languages included in Balatro, allowing users to
+        view joker information in their preferred language.
+      </p>
+    </Project>
+
+    <Project
+      title="TwatBot (2023-2025)"
+      links={[
+        {
+          name: "Repository",
+          url: "https://github.com/danielpower/twat-bot",
           icon: "mdi:github",
         },
         {
@@ -64,11 +94,6 @@ import Layout from "../layouts/Layout.astro";
         {
           name: "Game Jam Entry",
           url: "https://itch.io/jam/love2d-jam-2023/rate/1946249",
-          icon: "mdi:gamepad-variant",
-        },
-        {
-          name: "Play Online: Coming soon",
-          url: "",
           icon: "mdi:gamepad-variant",
         },
       ]}
