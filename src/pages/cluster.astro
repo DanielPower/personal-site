@@ -1,22 +1,54 @@
 ---
-import Image from "../components/Image.astro";
 import Layout from "../layouts/Layout.astro";
 export const prerender = false;
 
-const node_name = process.env.PUBLIC_NODE_NAME || "Unknown node";
+const node_name = import.meta.env.PUBLIC_NODE_NAME || "Unknown node";
+
+let clusterNodes = [];
+let error = null;
+
+try {
+  if (import.meta.env.SSR) {
+    const prometheusUrl = import.meta.env.PUBLIC_PROMETHEUS_URL;
+
+    const nodeInfoResponse = await fetch(
+      `${prometheusUrl}/api/v1/query?query=kube_node_info`,
+    );
+    const nodeStatusResponse = await fetch(
+      `${prometheusUrl}/api/v1/query?query=kube_node_status_condition{condition="Ready",status="true"}`,
+    );
+
+    if (nodeInfoResponse.ok && nodeStatusResponse.ok) {
+      const nodeInfoData = await nodeInfoResponse.json();
+      const nodeStatusData = await nodeStatusResponse.json();
+
+      const nodeInfo = nodeInfoData.data?.result || [];
+      const nodeStatus = nodeStatusData.data?.result || [];
+
+      clusterNodes = nodeInfo.map((item: any) => {
+        const nodeName = item.metric?.node || "Unknown";
+        const nodeReady = nodeStatus.some(
+          (status: any) => status.metric?.node === nodeName,
+        );
+
+        return {
+          name: nodeName,
+          status: nodeReady ? "Ready" : "NotReady",
+          kubeletVersion: item.metric?.kubelet_version || "Unknown",
+          osImage: item.metric?.os_image || "Unknown",
+        };
+      });
+    } else {
+      error = "Failed to fetch node data from Prometheus";
+    }
+  }
+} catch (e) {
+  console.error("Error fetching cluster data:", e);
+  error = e instanceof Error ? e.message : "Unknown error";
+}
 ---
 
 <Layout>
-  <ul>
-    <li>
-      <a
-        href="https://grafana.danielpower.ca/public-dashboards/e65981fffdbf4a129b23fd0e8e51b879?orgId=1&refresh=30s"
-        >Grafana Dashboard</a
-      >
-    </li>
-    <li><a href="https://status.danielpower.ca">Uptime Monitoring</a></li>
-  </ul>
-
   <p>
     This page is being served by <span class="node">{node_name}</span>
     in my homelab Kubernetes cluster.
@@ -24,17 +56,106 @@ const node_name = process.env.PUBLIC_NODE_NAME || "Unknown node";
 
   <p>If you refresh, you might get a different node! 🔄</p>
 
-  <div class="node-image">
-    <Image src={`nodes/${process.env.PUBLIC_NODE_NAME}.png`} alt={node_name} />
-  </div>
+  {
+    error ? (
+      <div class="error">{error}</div>
+    ) : (
+      <div>
+        {clusterNodes.length > 0 ? (
+          <table>
+            <thead>
+              <tr>
+                <th>Node Name</th>
+                <th>Status</th>
+                <th>Kubelet Version</th>
+                <th>OS</th>
+              </tr>
+            </thead>
+            <tbody>
+              {clusterNodes.map((node: any) => (
+                <tr class={node.name === node_name ? "current-node" : ""}>
+                  <td>{node.name}</td>
+                  <td>
+                    <span class={`status ${node.status.toLowerCase()}`}>
+                      {node.status}
+                    </span>
+                  </td>
+                  <td>{node.kubeletVersion}</td>
+                  <td>{node.osImage}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <p>
+            No cluster nodes found. This could be because you're viewing a
+            statically generated page or the Prometheus API is not accessible.
+          </p>
+        )}
+
+        <p class="data-source">
+          <small>
+            Data sourced from Prometheus. Last updated:{" "}
+            {new Date().toLocaleString()}
+          </small>
+        </p>
+      </div>
+    )
+  }
 </Layout>
 
 <style>
-  .node-image {
-    margin-top: 0.5rem;
-  }
-
   .node {
     font-weight: bold;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+  }
+
+  th,
+  td {
+    padding: 0.5rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  th {
+    font-weight: bold;
+  }
+
+  .current-node {
+    background-color: var(--color-dim-green);
+  }
+
+  .status {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: var(--color-dark);
+  }
+
+  .status.ready {
+    background-color: var(--color-bright-green);
+  }
+
+  .status.notready {
+    background-color: var(--color-bright-red);
+  }
+
+  .error {
+    color: var(--color-dark);
+    background-color: var(--color-bright-red);
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin: 1rem 0;
+  }
+
+  .data-source {
+    color: var(--color-gray);
+    margin-top: 1rem;
   }
 </style>
