@@ -2,14 +2,14 @@
 import Layout from "../layouts/Layout.astro";
 export const prerender = false;
 
-const node_name = import.meta.env.PUBLIC_NODE_NAME || "Unknown node";
+const node_name = process.env.PUBLIC_NODE_NAME || "Unknown node";
 
 let clusterNodes = [];
 let error = null;
 
 try {
   if (import.meta.env.SSR) {
-    const prometheusUrl = import.meta.env.PUBLIC_PROMETHEUS_URL;
+    const prometheusUrl = process.env.PUBLIC_PROMETHEUS_URL;
 
     const nodeInfoResponse = await fetch(
       `${prometheusUrl}/api/v1/query?query=kube_node_info`,
