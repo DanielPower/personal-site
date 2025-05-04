@@ -1,4 +1,4 @@
-import { defineConfig } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import icon from "astro-icon";
@@ -17,4 +17,10 @@ export default defineConfig({
   adapter: node({
     mode: "standalone",
   }),
+  env: {
+    schema: {
+      PROMETHEUS_URL: envField.string({ context: "server", access: "secret", optional: false }),
+      NODE_NAME: envField.string({ context: "server", access: "secret", optional: false })
+    }
+  }
 });

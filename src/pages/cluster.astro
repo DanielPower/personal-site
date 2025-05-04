@@ -1,21 +1,18 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { PROMETHEUS_URL, NODE_NAME } from "astro:env/server";
 export const prerender = false;
-
-const node_name = process.env.PUBLIC_NODE_NAME || "Unknown node";
 
 let clusterNodes = [];
 let error = null;
 
 try {
   if (import.meta.env.SSR) {
-    const prometheusUrl = process.env.PUBLIC_PROMETHEUS_URL;
-
     const nodeInfoResponse = await fetch(
-      `${prometheusUrl}/api/v1/query?query=kube_node_info`,
+      `${PROMETHEUS_URL}/api/v1/query?query=kube_node_info`,
     );
     const nodeStatusResponse = await fetch(
-      `${prometheusUrl}/api/v1/query?query=kube_node_status_condition{condition="Ready",status="true"}`,
+      `${PROMETHEUS_URL}/api/v1/query?query=kube_node_status_condition{condition="Ready",status="true"}`,
     );
 
     if (nodeInfoResponse.ok && nodeStatusResponse.ok) {
@@ -23,13 +20,17 @@ try {
       const nodeStatusData = await nodeStatusResponse.json();
 
       const nodeInfo = nodeInfoData.data?.result || [];
-      const nodeStatus = nodeStatusData.data?.result || [];
+      const nodeStatus = Object.fromEntries(
+        (nodeStatusData.data?.result || []).map(({ metric, value }: any) => [
+          metric.node,
+          value[1] > 0,
+        ]),
+      );
 
       clusterNodes = nodeInfo.map((item: any) => {
         const nodeName = item.metric?.node || "Unknown";
-        const nodeReady = nodeStatus.some(
-          (status: any) => status.metric?.node === nodeName,
-        );
+        console.log(nodeName, nodeStatus);
+        const nodeReady = nodeStatus[nodeName];
 
         return {
           name: nodeName,
@@ -50,7 +51,7 @@ try {
 
 <Layout>
   <p>
-    This page is being served by <span class="node">{node_name}</span>
+    This page is being served by <span class="node">{NODE_NAME}</span>
     in my homelab Kubernetes cluster.
   </p>
 
@@ -73,7 +74,7 @@ try {
             </thead>
             <tbody>
               {clusterNodes.map((node: any) => (
-                <tr class={node.name === node_name ? "current-node" : ""}>
+                <tr class={node.name === NODE_NAME ? "current-node" : ""}>
                   <td>{node.name}</td>
                   <td>
                     <span class={`status ${node.status.toLowerCase()}`}>
