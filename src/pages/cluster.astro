@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import ClusterNode from "../components/ClusterNode.astro";
 import { PROMETHEUS_URL, NODE_NAME } from "astro:env/server";
 export const prerender = false;
 
@@ -14,10 +15,26 @@ try {
     const nodeStatusResponse = await fetch(
       `${PROMETHEUS_URL}/api/v1/query?query=kube_node_status_condition{condition="Ready",status="true"}`,
     );
+    const memoryTotalResponse = await fetch(
+      `${PROMETHEUS_URL}/api/v1/query?query=node_memory_MemTotal_bytes`,
+    );
+    const memoryAvailableResponse = await fetch(
+      `${PROMETHEUS_URL}/api/v1/query?query=node_memory_MemAvailable_bytes`,
+    );
+    const cpuUsageResponse = await fetch(
+      `${PROMETHEUS_URL}/api/v1/query?query=100 - (avg by (instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)`,
+    );
+    const uptimeResponse = await fetch(
+      `${PROMETHEUS_URL}/api/v1/query?query=node_time_seconds - node_boot_time_seconds`,
+    );
 
-    if (nodeInfoResponse.ok && nodeStatusResponse.ok) {
+    if (nodeInfoResponse.ok && nodeStatusResponse.ok && memoryTotalResponse.ok && memoryAvailableResponse.ok && cpuUsageResponse.ok && uptimeResponse.ok) {
       const nodeInfoData = await nodeInfoResponse.json();
       const nodeStatusData = await nodeStatusResponse.json();
+      const memoryTotalData = await memoryTotalResponse.json();
+      const memoryAvailableData = await memoryAvailableResponse.json();
+      const cpuUsageData = await cpuUsageResponse.json();
+      const uptimeData = await uptimeResponse.json();
 
       const nodeInfo = nodeInfoData.data?.result || [];
       const nodeStatus = Object.fromEntries(
@@ -26,17 +43,77 @@ try {
           value[1] > 0,
         ]),
       );
+      
+      // Process memory data
+      const memoryTotal = Object.fromEntries(
+        (memoryTotalData.data?.result || []).map(({ metric, value }: any) => [
+          metric.instance.split(':')[0],
+          parseInt(value[1]),
+        ]),
+      );
+      
+      const memoryAvailable = Object.fromEntries(
+        (memoryAvailableData.data?.result || []).map(({ metric, value }: any) => [
+          metric.instance.split(':')[0],
+          parseInt(value[1]),
+        ]),
+      );
+      
+      // Process CPU usage data
+      const cpuUsage = Object.fromEntries(
+        (cpuUsageData.data?.result || []).map(({ metric, value }: any) => [
+          metric.instance.split(':')[0],
+          parseFloat(value[1]).toFixed(1),
+        ]),
+      );
+      
+      // Process uptime data
+      const uptime = Object.fromEntries(
+        (uptimeData.data?.result || []).map(({ metric, value }: any) => [
+          metric.instance.split(':')[0],
+          parseInt(value[1]),
+        ]),
+      );
+      console.log(nodeInfoData.data?.result);
+      console.log(nodeStatusData.data?.result);
 
       clusterNodes = nodeInfo.map((item: any) => {
         const nodeName = item.metric?.node || "Unknown";
-        console.log(nodeName, nodeStatus);
         const nodeReady = nodeStatus[nodeName];
+        const instanceName = item.metric?.internal_ip || nodeName;
+        
+        // Calculate memory in GB with 2 decimal precision
+        const totalMemoryBytes = memoryTotal[instanceName] || 0;
+        const availableMemoryBytes = memoryAvailable[instanceName] || 0;
+        const usedMemoryBytes = totalMemoryBytes - availableMemoryBytes;
+        
+        const totalMemoryGB = (totalMemoryBytes / (1024 * 1024 * 1024)).toFixed(2);
+        const usedMemoryGB = (usedMemoryBytes / (1024 * 1024 * 1024)).toFixed(2);
+        const memoryUsagePercent = totalMemoryBytes ? Math.round((usedMemoryBytes / totalMemoryBytes) * 100) : 0;
 
+        // Format uptime into days, hours, minutes
+        const uptimeSeconds = uptime[instanceName] || 0;
+        const uptimeDays = Math.floor(uptimeSeconds / 86400);
+        const uptimeHours = Math.floor((uptimeSeconds % 86400) / 3600);
+        const uptimeMinutes = Math.floor((uptimeSeconds % 3600) / 60);
+        
+        const formattedUptime = uptimeDays > 0 
+          ? `${uptimeDays}d ${uptimeHours}h ${uptimeMinutes}m`
+          : uptimeHours > 0
+            ? `${uptimeHours}h ${uptimeMinutes}m`
+            : `${uptimeMinutes}m`;
+            
         return {
           name: nodeName,
           status: nodeReady ? "Ready" : "NotReady",
           kubeletVersion: item.metric?.kubelet_version || "Unknown",
           osImage: item.metric?.os_image || "Unknown",
+          totalMemoryGB,
+          usedMemoryGB,
+          memoryUsagePercent,
+          cpuUsagePercent: parseFloat(cpuUsage[instanceName] || 0),
+          uptime: formattedUptime,
+          uptimeSeconds
         };
       });
     } else {
@@ -51,7 +128,7 @@ try {
 
 <Layout>
   <p>
-    This page is being served by <span class="node">{NODE_NAME}</span>
+    This page is being served by <span class="node-name">{NODE_NAME}</span>
     in my homelab Kubernetes cluster.
   </p>
 
@@ -63,30 +140,13 @@ try {
     ) : (
       <div>
         {clusterNodes.length > 0 ? (
-          <table>
-            <thead>
-              <tr>
-                <th>Node Name</th>
-                <th>Status</th>
-                <th>Kubelet Version</th>
-                <th>OS</th>
-              </tr>
-            </thead>
-            <tbody>
-              {clusterNodes.map((node: any) => (
-                <tr class={node.name === NODE_NAME ? "current-node" : ""}>
-                  <td>{node.name}</td>
-                  <td>
-                    <span class={`status ${node.status.toLowerCase()}`}>
-                      {node.status}
-                    </span>
-                  </td>
-                  <td>{node.kubeletVersion}</td>
-                  <td>{node.osImage}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div class="cluster-nodes">
+            {clusterNodes.map((node: any) => (
+              <div class="node">
+                <ClusterNode node={node} />
+              </div>
+            ))}
+          </div>
         ) : (
           <p>
             No cluster nodes found. This could be because you're viewing a
@@ -106,45 +166,15 @@ try {
 </Layout>
 
 <style>
-  .node {
+  .node-name {
     font-weight: bold;
   }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
+  .cluster-nodes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
     margin: 1rem 0;
-  }
-
-  th,
-  td {
-    padding: 0.5rem;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-
-  th {
-    font-weight: bold;
-  }
-
-  .current-node {
-    background-color: var(--color-dim-green);
-  }
-
-  .status {
-    display: inline-block;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    font-size: 0.85rem;
-    color: var(--color-dark);
-  }
-
-  .status.ready {
-    background-color: var(--color-bright-green);
-  }
-
-  .status.notready {
-    background-color: var(--color-bright-red);
   }
 
   .error {

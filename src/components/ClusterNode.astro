@@ -1,0 +1,112 @@
+---
+interface ClusterNode {
+  name: string;
+  status: string;
+  kubeletVersion: string;
+  osImage: string;
+  totalMemoryGB: string;
+  usedMemoryGB: string;
+  memoryUsagePercent: number;
+  cpuUsagePercent: number;
+  uptime: string;
+  uptimeSeconds: number;
+}
+
+const { node } = Astro.props;
+---
+
+<div class="node">
+  <div class="node-info">
+    <h3 class="node-name">
+      <div class="flex">
+        <div>{node.name}</div>
+        <div class={`status ${node.status.toLowerCase()}`}>{node.status}</div>
+      </div>
+    </h3>
+    <div class="node-detail">
+      <span class="label">Kubelet:</span>
+      {node.kubeletVersion}
+    </div>
+    <div class="node-detail">
+      <span class="label">OS:</span>
+      {node.osImage}
+    </div>
+    <div class="node-detail">
+      <span class="label">Uptime:</span>
+      {node.uptime}
+    </div>
+    <div class="memory-section">
+      <div class="node-detail">
+        <span class="label">Memory:</span>
+        {node.usedMemoryGB} / {node.totalMemoryGB} GB ({node.memoryUsagePercent}%)
+      </div>
+      <div style="height: 8px; background-color: #e0e0e0; border-radius: 4px; overflow: hidden; margin-top: 0.25rem; width: 100%;">
+        <div 
+          style={`height: 100%; background-color: #3498db; width: ${node.memoryUsagePercent}%;`}
+        ></div>
+      </div>
+    </div>
+    <div class="cpu-section">
+      <div class="node-detail">
+        <span class="label">CPU:</span>
+        {node.cpuUsagePercent.toFixed(1)}%
+      </div>
+      <div style="height: 8px; background-color: #e0e0e0; border-radius: 4px; overflow: hidden; margin-top: 0.25rem; width: 100%;">
+        <div 
+          style={`height: 100%; background-color: ${node.cpuUsagePercent > 80 ? '#e74c3c' : node.cpuUsagePercent > 60 ? '#f39c12' : '#2ecc71'}; width: ${node.cpuUsagePercent}%; transition: width 0.3s ease;`}
+        ></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .node {
+    padding: 0.5rem;
+    background-color: var(--color-bg2);
+    border-radius: 8px;
+  }
+  .flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .node-name {
+    font-size: 1.2rem;
+  }
+
+  .node-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .node-detail {
+    font-size: 0.9rem;
+  }
+
+  .label {
+    font-weight: bold;
+  }
+
+  .memory-section {
+    margin-top: 0.5rem;
+  }
+
+  .status {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: var(--color-dark);
+  }
+
+  .status.ready {
+    background-color: var(--color-bright-green);
+  }
+
+  .status.notready {
+    background-color: var(--color-bright-red);
+  }
+</style>
