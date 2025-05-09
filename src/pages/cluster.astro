@@ -1,120 +1,18 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ClusterNode from "../components/ClusterNode.astro";
-import { PROMETHEUS_URL, NODE_NAME } from "astro:env/server";
+import { NODE_NAME } from "astro:env/server";
+import { fetchClusterData, type ClusterNodeData } from "../utils/prometheus";
 export const prerender = false;
 
-let clusterNodes = [];
-let error = null;
+let clusterNodes: ClusterNodeData[] = [];
+let error: string | null = null;
 
 try {
   if (import.meta.env.SSR) {
-    // Run all Prometheus fetches in parallel
-    const [
-      nodeInfoResponse,
-      nodeStatusResponse,
-      memoryTotalResponse,
-      memoryAvailableResponse,
-      cpuUsageResponse,
-      uptimeResponse
-    ] = await Promise.all([
-      fetch(`${PROMETHEUS_URL}/api/v1/query?query=kube_node_info`),
-      fetch(`${PROMETHEUS_URL}/api/v1/query?query=kube_node_status_condition{condition="Ready",status="true"}`),
-      fetch(`${PROMETHEUS_URL}/api/v1/query?query=node_memory_MemTotal_bytes`),
-      fetch(`${PROMETHEUS_URL}/api/v1/query?query=node_memory_MemAvailable_bytes`),
-      fetch(`${PROMETHEUS_URL}/api/v1/query?query=100 - avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[1m]) * 100)`),
-      fetch(`${PROMETHEUS_URL}/api/v1/query?query=node_time_seconds - node_boot_time_seconds`),
-    ]);
-
-    if (nodeInfoResponse.ok && nodeStatusResponse.ok && memoryTotalResponse.ok && memoryAvailableResponse.ok && cpuUsageResponse.ok && uptimeResponse.ok) {
-      const nodeInfoData = await nodeInfoResponse.json();
-      const nodeStatusData = await nodeStatusResponse.json();
-      const memoryTotalData = await memoryTotalResponse.json();
-      const memoryAvailableData = await memoryAvailableResponse.json();
-      const cpuUsageData = await cpuUsageResponse.json();
-      const uptimeData = await uptimeResponse.json();
-
-      const nodeInfo = nodeInfoData.data?.result || [];
-      const nodeStatus = Object.fromEntries(
-        (nodeStatusData.data?.result || []).map(({ metric, value }: any) => [
-          metric.node,
-          value[1] > 0,
-        ]),
-      );
-      
-      // Process memory data
-      const memoryTotal = Object.fromEntries(
-        (memoryTotalData.data?.result || []).map(({ metric, value }: any) => [
-          metric.instance.split(':')[0],
-          parseInt(value[1]),
-        ]),
-      );
-      
-      const memoryAvailable = Object.fromEntries(
-        (memoryAvailableData.data?.result || []).map(({ metric, value }: any) => [
-          metric.instance.split(':')[0],
-          parseInt(value[1]),
-        ]),
-      );
-      
-      // Process CPU usage data
-      const cpuUsage = Object.fromEntries(
-        (cpuUsageData.data?.result || []).map(({ metric, value }: any) => [
-          metric.instance.split(':')[0],
-          parseFloat(value[1]).toFixed(1),
-        ]),
-      );
-      
-      // Process uptime data
-      const uptime = Object.fromEntries(
-        (uptimeData.data?.result || []).map(({ metric, value }: any) => [
-          metric.instance.split(':')[0],
-          parseInt(value[1]),
-        ]),
-      );
-
-      clusterNodes = nodeInfo.map((item: any) => {
-        const nodeName = item.metric?.node || "Unknown";
-        const nodeReady = nodeStatus[nodeName];
-        const instanceName = item.metric?.internal_ip || nodeName;
-        
-        // Calculate memory in GB with 2 decimal precision
-        const totalMemoryBytes = memoryTotal[instanceName] || 0;
-        const availableMemoryBytes = memoryAvailable[instanceName] || 0;
-        const usedMemoryBytes = totalMemoryBytes - availableMemoryBytes;
-        
-        const totalMemoryGB = (totalMemoryBytes / (1024 * 1024 * 1024)).toFixed(2);
-        const usedMemoryGB = (usedMemoryBytes / (1024 * 1024 * 1024)).toFixed(2);
-        const memoryUsagePercent = totalMemoryBytes ? Math.round((usedMemoryBytes / totalMemoryBytes) * 100) : 0;
-
-        // Format uptime into days, hours, minutes
-        const uptimeSeconds = uptime[instanceName] || 0;
-        const uptimeDays = Math.floor(uptimeSeconds / 86400);
-        const uptimeHours = Math.floor((uptimeSeconds % 86400) / 3600);
-        const uptimeMinutes = Math.floor((uptimeSeconds % 3600) / 60);
-        
-        const formattedUptime = uptimeDays > 0 
-          ? `${uptimeDays}d ${uptimeHours}h ${uptimeMinutes}m`
-          : uptimeHours > 0
-            ? `${uptimeHours}h ${uptimeMinutes}m`
-            : `${uptimeMinutes}m`;
-            
-        return {
-          name: nodeName,
-          status: nodeReady ? "Ready" : "NotReady",
-          kubeletVersion: item.metric?.kubelet_version || "Unknown",
-          osImage: item.metric?.os_image || "Unknown",
-          totalMemoryGB,
-          usedMemoryGB,
-          memoryUsagePercent,
-          cpuUsagePercent: parseFloat(cpuUsage[instanceName] || 0),
-          uptime: formattedUptime,
-          uptimeSeconds
-        };
-      });
-    } else {
-      error = "Failed to fetch node data from Prometheus";
-    }
+    const result = await fetchClusterData();
+    clusterNodes = result.nodes;
+    error = result.error;
   }
 } catch (e) {
   console.error("Error fetching cluster data:", e);
@@ -130,35 +28,30 @@ try {
 
   <p>If you refresh, you might get a different node! 🔄</p>
 
-  {
-    error ? (
-      <div class="error">{error}</div>
-    ) : (
-      <div>
-        {clusterNodes.length > 0 ? (
-          <div class="cluster-nodes">
-            {clusterNodes.map((node: any) => (
-              <div class="node">
-                <ClusterNode node={node} />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p>
-            No cluster nodes found. This could be because you're viewing a
-            statically generated page or the Prometheus API is not accessible.
-          </p>
-        )}
-
-        <p class="data-source">
-          <small>
-            Data sourced from Prometheus. Last updated:{" "}
-            {new Date().toLocaleString()}
-          </small>
+  {error && <div class="error">{error}</div>}
+  
+  {!error && (
+    <div>
+      {clusterNodes.length > 0 ? (
+        <div class="cluster-nodes">
+          {clusterNodes.map((node) => (
+            <ClusterNode node={node} />
+          ))}
+        </div>
+      ) : (
+        <p>
+          No cluster nodes found. This could be because you're viewing a
+          statically generated page or the Prometheus API is not accessible.
         </p>
-      </div>
-    )
-  }
+      )}
+
+      <p class="data-source">
+        <small>
+          Data sourced from Prometheus. Last updated: {new Date().toLocaleString()}
+        </small>
+      </p>
+    </div>
+  )}
 </Layout>
 
 <style>

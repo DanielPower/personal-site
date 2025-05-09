@@ -4,8 +4,8 @@ interface ClusterNode {
   status: string;
   kubeletVersion: string;
   osImage: string;
-  totalMemoryGB: string;
-  usedMemoryGB: string;
+  totalMemoryGiB: string;
+  usedMemoryGiB: string;
   memoryUsagePercent: number;
   cpuUsagePercent: number;
   uptime: string;
@@ -38,7 +38,7 @@ const { node } = Astro.props;
     <div class="memory-section">
       <div class="node-detail">
         <span class="label">Memory:</span>
-        {node.usedMemoryGB} / {node.totalMemoryGB} GB ({node.memoryUsagePercent}%)
+        {node.usedMemoryGiB} / {node.totalMemoryGiB} GiB ({node.memoryUsagePercent}%)
       </div>
       <div class="progress-bar">
         <div 
