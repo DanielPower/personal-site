@@ -34,17 +34,6 @@ try {
       <div>
         {clusterNodes.length > 0 ? (
           <div>
-            <h2>Control Planes</h2>
-            <div class="cluster-nodes">
-              {clusterNodes
-                .filter((node) => node.name.startsWith("controlplane-"))
-                .map((node) => (
-                  <div class="cluster-node">
-                    <ClusterNode node={node} />
-                  </div>
-                ))}
-            </div>
-
             <h2>Workers</h2>
             <div class="cluster-nodes">
               {clusterNodes
@@ -53,6 +42,16 @@ try {
                   <div
                     class={`cluster-node ${node.name === NODE_NAME ? "active" : ""}`}
                   >
+                    <ClusterNode node={node} />
+                  </div>
+                ))}
+            </div>
+            <h2>Control Planes</h2>
+            <div class="cluster-nodes">
+              {clusterNodes
+                .filter((node) => node.name.startsWith("controlplane-"))
+                .map((node) => (
+                  <div class="cluster-node">
                     <ClusterNode node={node} />
                   </div>
                 ))}
