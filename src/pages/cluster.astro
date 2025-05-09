@@ -22,7 +22,7 @@ try {
       `${PROMETHEUS_URL}/api/v1/query?query=node_memory_MemAvailable_bytes`,
     );
     const cpuUsageResponse = await fetch(
-      `${PROMETHEUS_URL}/api/v1/query?query=100 - (avg by (instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)`,
+      `${PROMETHEUS_URL}/api/v1/query?query=100 - avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[1m]) * 100)`,
     );
     const uptimeResponse = await fetch(
       `${PROMETHEUS_URL}/api/v1/query?query=node_time_seconds - node_boot_time_seconds`,
@@ -74,8 +74,6 @@ try {
           parseInt(value[1]),
         ]),
       );
-      console.log(nodeInfoData.data?.result);
-      console.log(nodeStatusData.data?.result);
 
       clusterNodes = nodeInfo.map((item: any) => {
         const nodeName = item.metric?.node || "Unknown";
