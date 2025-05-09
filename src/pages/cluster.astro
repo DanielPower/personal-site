@@ -9,24 +9,22 @@ let error = null;
 
 try {
   if (import.meta.env.SSR) {
-    const nodeInfoResponse = await fetch(
-      `${PROMETHEUS_URL}/api/v1/query?query=kube_node_info`,
-    );
-    const nodeStatusResponse = await fetch(
-      `${PROMETHEUS_URL}/api/v1/query?query=kube_node_status_condition{condition="Ready",status="true"}`,
-    );
-    const memoryTotalResponse = await fetch(
-      `${PROMETHEUS_URL}/api/v1/query?query=node_memory_MemTotal_bytes`,
-    );
-    const memoryAvailableResponse = await fetch(
-      `${PROMETHEUS_URL}/api/v1/query?query=node_memory_MemAvailable_bytes`,
-    );
-    const cpuUsageResponse = await fetch(
-      `${PROMETHEUS_URL}/api/v1/query?query=100 - avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[1m]) * 100)`,
-    );
-    const uptimeResponse = await fetch(
-      `${PROMETHEUS_URL}/api/v1/query?query=node_time_seconds - node_boot_time_seconds`,
-    );
+    // Run all Prometheus fetches in parallel
+    const [
+      nodeInfoResponse,
+      nodeStatusResponse,
+      memoryTotalResponse,
+      memoryAvailableResponse,
+      cpuUsageResponse,
+      uptimeResponse
+    ] = await Promise.all([
+      fetch(`${PROMETHEUS_URL}/api/v1/query?query=kube_node_info`),
+      fetch(`${PROMETHEUS_URL}/api/v1/query?query=kube_node_status_condition{condition="Ready",status="true"}`),
+      fetch(`${PROMETHEUS_URL}/api/v1/query?query=node_memory_MemTotal_bytes`),
+      fetch(`${PROMETHEUS_URL}/api/v1/query?query=node_memory_MemAvailable_bytes`),
+      fetch(`${PROMETHEUS_URL}/api/v1/query?query=100 - avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[1m]) * 100)`),
+      fetch(`${PROMETHEUS_URL}/api/v1/query?query=node_time_seconds - node_boot_time_seconds`),
+    ]);
 
     if (nodeInfoResponse.ok && nodeStatusResponse.ok && memoryTotalResponse.ok && memoryAvailableResponse.ok && cpuUsageResponse.ok && uptimeResponse.ok) {
       const nodeInfoData = await nodeInfoResponse.json();
