@@ -15,59 +15,56 @@ interface ClusterNode {
 const { node } = Astro.props;
 ---
 
-<div class="node">
-  <div class="node-info">
-    <h3 class="node-name">
-      <div class="flex">
-        <div>{node.name}</div>
-        <div class={`status ${node.status.toLowerCase()}`}>{node.status}</div>
-      </div>
-    </h3>
+<div class="node-info">
+  <h3 class="node-name">
+    <div class="flex">
+      <div>{node.name}</div>
+      <div class={`status ${node.status.toLowerCase()}`}>{node.status}</div>
+    </div>
+  </h3>
+  <div class="node-detail">
+    <span class="label">Kubelet:</span>
+    {node.kubeletVersion}
+  </div>
+  <div class="node-detail">
+    <span class="label">OS:</span>
+    {node.osImage}
+  </div>
+  <div class="node-detail">
+    <span class="label">Uptime:</span>
+    {node.uptime}
+  </div>
+  <div class="memory-section">
     <div class="node-detail">
-      <span class="label">Kubelet:</span>
-      {node.kubeletVersion}
+      <span class="label">Memory:</span>
+      {node.usedMemoryGiB} / {node.totalMemoryGiB} GiB ({
+        node.memoryUsagePercent
+      }%)
     </div>
+    <div class="progress-bar">
+      <div
+        class="progress-bar-fill memory-fill"
+        style={`width: ${node.memoryUsagePercent}%;`}
+      >
+      </div>
+    </div>
+  </div>
+  <div class="cpu-section">
     <div class="node-detail">
-      <span class="label">OS:</span>
-      {node.osImage}
+      <span class="label">CPU:</span>
+      {node.cpuUsagePercent.toFixed(1)}%
     </div>
-    <div class="node-detail">
-      <span class="label">Uptime:</span>
-      {node.uptime}
-    </div>
-    <div class="memory-section">
-      <div class="node-detail">
-        <span class="label">Memory:</span>
-        {node.usedMemoryGiB} / {node.totalMemoryGiB} GiB ({node.memoryUsagePercent}%)
-      </div>
-      <div class="progress-bar">
-        <div 
-          class="progress-bar-fill memory-fill"
-          style={`width: ${node.memoryUsagePercent}%;`}
-        ></div>
-      </div>
-    </div>
-    <div class="cpu-section">
-      <div class="node-detail">
-        <span class="label">CPU:</span>
-        {node.cpuUsagePercent.toFixed(1)}%
-      </div>
-      <div class="progress-bar">
-        <div 
-          class={`progress-bar-fill cpu-fill ${node.cpuUsagePercent > 80 ? 'high' : node.cpuUsagePercent > 60 ? 'medium' : 'low'}`}
-          style={`width: ${node.cpuUsagePercent}%;`}
-        ></div>
+    <div class="progress-bar">
+      <div
+        class="progress-bar-fill cpu-fill"
+        style={`width: ${node.cpuUsagePercent}%;`}
+      >
       </div>
     </div>
   </div>
 </div>
 
 <style>
-  .node {
-    padding: 0.5rem;
-    background-color: var(--color-bg2);
-    border-radius: 8px;
-  }
   .flex {
     display: flex;
     justify-content: space-between;
@@ -96,7 +93,7 @@ const { node } = Astro.props;
   .cpu-section {
     margin-top: 0.5rem;
   }
-  
+
   .progress-bar {
     height: 8px;
     background-color: var(--color-gray);
@@ -105,27 +102,19 @@ const { node } = Astro.props;
     margin-top: 0.25rem;
     width: 100%;
   }
-  
+
   .progress-bar-fill {
     height: 100%;
     border-radius: 4px;
     transition: width 0.3s ease;
   }
-  
+
   .memory-fill {
-    background-color: var(--color-blue);
-  }
-  
-  .cpu-fill {
     background-color: var(--color-green);
   }
-  
-  .cpu-fill.medium {
-    background-color: var(--color-yellow);
-  }
-  
-  .cpu-fill.high {
-    background-color: var(--color-red);
+
+  .cpu-fill {
+    background-color: var(--color-blue);
   }
 
   .status {

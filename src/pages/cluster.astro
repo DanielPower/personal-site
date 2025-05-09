@@ -22,48 +22,85 @@ try {
 
 <Layout>
   <p>
-    This page is being served by <span class="node-name">{NODE_NAME}</span>
-    in my homelab Kubernetes cluster.
+    This page is being served by <span class="node-name">{NODE_NAME}</span>.
   </p>
 
   <p>If you refresh, you might get a different node! 🔄</p>
 
   {error && <div class="error">{error}</div>}
-  
-  {!error && (
-    <div>
-      {clusterNodes.length > 0 ? (
-        <div class="cluster-nodes">
-          {clusterNodes.map((node) => (
-            <ClusterNode node={node} />
-          ))}
-        </div>
-      ) : (
-        <p>
-          No cluster nodes found. This could be because you're viewing a
-          statically generated page or the Prometheus API is not accessible.
-        </p>
-      )}
 
-      <p class="data-source">
-        <small>
-          Data sourced from Prometheus. Last updated: {new Date().toLocaleString()}
-        </small>
-      </p>
-    </div>
-  )}
+  {
+    !error && (
+      <div>
+        {clusterNodes.length > 0 ? (
+          <div>
+            <h2>Control Planes</h2>
+            <div class="cluster-nodes">
+              {clusterNodes
+                .filter((node) => node.name.startsWith("controlplane-"))
+                .map((node) => (
+                  <div class="cluster-node">
+                    <ClusterNode node={node} />
+                  </div>
+                ))}
+            </div>
+
+            <h2>Workers</h2>
+            <div class="cluster-nodes">
+              {clusterNodes
+                .filter((node) => !node.name.startsWith("controlplane-"))
+                .map((node) => (
+                  <div
+                    class={`cluster-node ${node.name === NODE_NAME ? "active" : ""}`}
+                  >
+                    <ClusterNode node={node} />
+                  </div>
+                ))}
+            </div>
+          </div>
+        ) : (
+          <p>
+            No cluster nodes found. This could be because you're viewing a
+            statically generated page or the Prometheus API is not accessible.
+          </p>
+        )}
+
+        <p class="data-source">
+          <small>
+            Data sourced from Prometheus. Last updated:{" "}
+            {new Date().toLocaleString()}
+          </small>
+        </p>
+      </div>
+    )
+  }
 </Layout>
 
 <style>
   .node-name {
     font-weight: bold;
+    color: var(--color-bright-green);
+  }
+
+  h2 {
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
   }
 
   .cluster-nodes {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1rem;
-    margin: 1rem 0;
+  }
+
+  .cluster-node {
+    background-color: var(--color-bg2);
+    border-radius: 4px;
+    padding: 0.5rem;
+  }
+
+  .cluster-node.active {
+    border: 2px solid var(--color-bright-green);
   }
 
   .error {
