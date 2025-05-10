@@ -23,10 +23,6 @@ const { node } = Astro.props;
     </div>
   </h3>
   <div class="node-detail">
-    <span class="label">Kubelet:</span>
-    {node.kubeletVersion}
-  </div>
-  <div class="node-detail">
     <span class="label">OS:</span>
     {node.osImage}
   </div>
@@ -78,7 +74,7 @@ const { node } = Astro.props;
   .node-info {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.15rem;
   }
 
   .node-detail {
@@ -91,7 +87,7 @@ const { node } = Astro.props;
 
   .memory-section,
   .cpu-section {
-    margin-top: 0.5rem;
+    margin-top: 0.25rem;
   }
 
   .progress-bar {

@@ -23,9 +23,8 @@ try {
 <Layout>
   <p>
     This page is being served by <span class="node-name">{NODE_NAME}</span>.
+    <br />Try refreshing the page! 🔄
   </p>
-
-  <p>If you refresh, you might get a different node! 🔄</p>
 
   {error && <div class="error">{error}</div>}
 
@@ -33,7 +32,7 @@ try {
     !error && (
       <div>
         {clusterNodes.length > 0 ? (
-          <div>
+          <>
             <h2>Workers</h2>
             <div class="cluster-nodes">
               {clusterNodes
@@ -56,7 +55,7 @@ try {
                   </div>
                 ))}
             </div>
-          </div>
+          </>
         ) : (
           <p>
             No cluster nodes found. This could be because you're viewing a
@@ -82,14 +81,14 @@ try {
   }
 
   h2 {
-    margin-top: 2rem;
+    margin-top: 1rem;
     margin-bottom: 0.5rem;
   }
 
   .cluster-nodes {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1rem;
+    gap: 0.5rem;
   }
 
   .cluster-node {
