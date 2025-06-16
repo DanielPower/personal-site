@@ -1,4 +1,4 @@
-import { defineConfig, envField } from "astro/config";
+import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import icon from "astro-icon";
@@ -9,18 +9,6 @@ export default defineConfig({
   site: "https://danielpower.ca",
   integrations: [mdx(), sitemap(), icon()],
   trailingSlash: "never",
-  markdown: {
-    shikiConfig: {
-      theme: shikiTheme,
-    },
-  },
-  adapter: node({
-    mode: "standalone",
-  }),
-  env: {
-    schema: {
-      PROMETHEUS_URL: envField.string({ context: "server", access: "secret", optional: false }),
-      NODE_NAME: envField.string({ context: "server", access: "secret", optional: false })
-    }
-  }
+  markdown: { shikiConfig: { theme: shikiTheme } },
+  adapter: node({ mode: "standalone" }),
 });
