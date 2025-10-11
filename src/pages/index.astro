@@ -2,9 +2,8 @@
 import Layout from "../layouts/Layout.astro";
 import Icon from "../components/Icon.astro";
 import { searchRandom } from "@immich/sdk";
-import { dataUrlForAsset, ensureImmich } from "../util/immich";
-
-ensureImmich();
+import { dataUrlForAsset } from "../util/immich";
+export const prerender = false;
 
 const circle = [
   {

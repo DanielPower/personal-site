@@ -1,6 +1,5 @@
 import {
   AssetMediaSize,
-  init,
   viewAsset,
   type AlbumResponseDto,
 } from "@immich/sdk";
@@ -21,14 +20,3 @@ export const transformPublicAlbums = (
       ...album,
       albumName: album.albumName.replace("[PUBLIC]", "").trim(),
     }));
-
-let immichInitialized = false;
-export const ensureImmich = () => {
-  if (!immichInitialized) {
-    init({
-      baseUrl: "https://photos.danielpower.ca/api",
-      apiKey: import.meta.env.IMMICH_API_KEY,
-    });
-    immichInitialized = true;
-  }
-};
