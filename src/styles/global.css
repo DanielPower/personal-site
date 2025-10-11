@@ -107,7 +107,7 @@ code:not(.astro-code *) {
   word-break: break-word;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 768px) {
   :root {
     --gutter: 1rem;
   }
