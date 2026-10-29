@@ -1,8 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Icon from "../components/Icon.astro";
-import { searchRandom } from "@immich/sdk";
-import { dataUrlForAsset } from "../util/immich";
 export const prerender = false;
 
 const circle = [
@@ -47,11 +45,6 @@ const circle = [
     url: "https://evaan.dev",
   },
 ].sort(() => Math.random() - 0.5);
-
-const response = await searchRandom({
-  randomSearchDto: { tagIds: ["6c885803-5660-4677-a63d-bfc95007d608"] },
-});
-const image = await dataUrlForAsset(response[0].id);
 ---
 
 <Layout title="Daniel Power">
@@ -118,9 +111,6 @@ const image = await dataUrlForAsset(response[0].id);
           >osu!</a
         >.
       </p>
-      <p>Please enjoy this photo of Maria. She is very grumpy.</p>
-      <br />
-      <img src={image} alt="Maria" />
     </div>
   </div>
 </Layout>
